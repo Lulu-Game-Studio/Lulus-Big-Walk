@@ -21,7 +21,7 @@ Lulu's Big Walk is a 2D endless runner where the player controls Lulu, an adorab
 - **Abilities:**
   - **Double Jump:** A second jump can be performed while airborne.
   - **Bark:** Stuns nearby dogs and scares cats, opening a passage window. Short cooldown.
-  - **Pee Shield:** Marks territory creating a temporary protective area. Long cooldown.
+  - **Poo Shield:** Marks territory creating a temporary protective area. Long cooldown.
 - **Actions:**
   - Run and survive as long as possible.
   - Dodge obstacles and collect bones and treats.
