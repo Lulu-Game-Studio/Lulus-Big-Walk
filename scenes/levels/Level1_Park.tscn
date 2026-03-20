@@ -3,9 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://sna6qk6kvv3y" path="res://scenes/player/Lulu.tscn" id="1_lulu"]
 [ext_resource type="Script" uid="uid://pkrrm4ghuya0" path="res://scenes/levels/Level1.gd" id="2_level"]
 [ext_resource type="Script" uid="uid://rr1mbwqk1lin" path="res://scenes/levels/Bone.gd" id="3_bone"]
+[ext_resource type="Texture2D" uid="uid://cfktntwdbrn6h" path="res://scenes/player/femur.png" id="4_c75a6"]
 [ext_resource type="Script" uid="uid://dwulutwj3arbe" path="res://scenes/levels/Goal.gd" id="4_goal"]
 [ext_resource type="Texture2D" uid="uid://level1bg001" path="res://assets/sprites/level1_bg.png" id="5_bg"]
-[ext_resource type="Texture2D" uid="uid://kaf0flah2gwm" path="res://assets/sprites/tileset_park.png" id="6_ts"]
 
 [sub_resource type="RectangleShape2D" id="Shp_ground"]
 size = Vector2(1280, 64)
@@ -44,26 +44,26 @@ texture = ExtResource("5_bg")
 
 [node name="Ground" type="StaticBody2D" parent="." unique_id=1762753718]
 
-[node name="Col" type="CollisionShape2D" parent="Ground" unique_id=1362660153]
+[node name="Collider" type="CollisionShape2D" parent="Ground" unique_id=1362660153]
 position = Vector2(640, 224)
 shape = SubResource("Shp_ground")
 
 [node name="Platform1" type="StaticBody2D" parent="." unique_id=157452691]
 
-[node name="Col" type="CollisionShape2D" parent="Platform1" unique_id=1579407974]
+[node name="Collider" type="CollisionShape2D" parent="Platform1" unique_id=1579407974]
 position = Vector2(328, 147)
 shape = SubResource("Shp_p1")
 
 [node name="Platform2" type="StaticBody2D" parent="." unique_id=1945742456]
 
-[node name="Col" type="CollisionShape2D" parent="Platform2" unique_id=323268014]
+[node name="Collider" type="CollisionShape2D" parent="Platform2" unique_id=323268014]
 position = Vector2(552, 115)
 shape = SubResource("Shp_p2")
 
 [node name="Platform3" type="StaticBody2D" parent="." unique_id=1007701587]
 
-[node name="Col" type="CollisionShape2D" parent="Platform3" unique_id=1829130769]
-position = Vector2(824, 83)
+[node name="Collider" type="CollisionShape2D" parent="Platform3" unique_id=1829130769]
+position = Vector2(840, 83)
 shape = SubResource("Shp_p3")
 
 [node name="Bones" type="Node2D" parent="." unique_id=1667051459]
@@ -72,72 +72,75 @@ shape = SubResource("Shp_p3")
 position = Vector2(112, 177)
 script = ExtResource("3_bone")
 
-[node name="Col" type="CollisionShape2D" parent="Bones/Bone1" unique_id=1848369619]
+[node name="Collider" type="CollisionShape2D" parent="Bones/Bone1" unique_id=1848369619]
 shape = SubResource("Shp_bone")
 
 [node name="Spr" type="Sprite2D" parent="Bones/Bone1" unique_id=1105359953]
-texture = ExtResource("6_ts")
-region_enabled = true
+position = Vector2(1.9073486e-06, -0.9999957)
+scale = Vector2(0.3125, 0.31249982)
+texture = ExtResource("4_c75a6")
 region_rect = Rect2(0, 32, 16, 16)
 
 [node name="Bone2" type="Area2D" parent="Bones" unique_id=1782633930 groups=["bone"]]
 position = Vector2(304, 177)
 script = ExtResource("3_bone")
 
-[node name="Col" type="CollisionShape2D" parent="Bones/Bone2" unique_id=1424935236]
+[node name="Collider" type="CollisionShape2D" parent="Bones/Bone2" unique_id=1424935236]
 shape = SubResource("Shp_bone")
 
 [node name="Spr" type="Sprite2D" parent="Bones/Bone2" unique_id=496829442]
-texture = ExtResource("6_ts")
-region_enabled = true
+position = Vector2(-1, 7.6293945e-06)
+scale = Vector2(0.313, 0.3260001)
+texture = ExtResource("4_c75a6")
 region_rect = Rect2(0, 32, 16, 16)
 
 [node name="Bone3" type="Area2D" parent="Bones" unique_id=1045391172 groups=["bone"]]
 position = Vector2(304, 137)
 script = ExtResource("3_bone")
 
-[node name="Col" type="CollisionShape2D" parent="Bones/Bone3" unique_id=433759548]
+[node name="Collider" type="CollisionShape2D" parent="Bones/Bone3" unique_id=433759548]
 shape = SubResource("Shp_bone")
 
 [node name="Spr" type="Sprite2D" parent="Bones/Bone3" unique_id=871473776]
-texture = ExtResource("6_ts")
-region_enabled = true
+position = Vector2(-9.536743e-07, -2.861023e-06)
+scale = Vector2(0.313, 0.3156667)
+texture = ExtResource("4_c75a6")
 region_rect = Rect2(0, 32, 16, 16)
 
 [node name="Bone4" type="Area2D" parent="Bones" unique_id=278993293 groups=["bone"]]
 position = Vector2(528, 105)
 script = ExtResource("3_bone")
 
-[node name="Col" type="CollisionShape2D" parent="Bones/Bone4" unique_id=1783092970]
+[node name="Collider" type="CollisionShape2D" parent="Bones/Bone4" unique_id=1783092970]
 shape = SubResource("Shp_bone")
 
 [node name="Spr" type="Sprite2D" parent="Bones/Bone4" unique_id=290010909]
-texture = ExtResource("6_ts")
-region_enabled = true
+scale = Vector2(0.313, 0.313)
+texture = ExtResource("4_c75a6")
 region_rect = Rect2(0, 32, 16, 16)
 
 [node name="Bone5" type="Area2D" parent="Bones" unique_id=446596137 groups=["bone"]]
 position = Vector2(832, 73)
 script = ExtResource("3_bone")
 
-[node name="Col" type="CollisionShape2D" parent="Bones/Bone5" unique_id=1275226074]
+[node name="Collider" type="CollisionShape2D" parent="Bones/Bone5" unique_id=1275226074]
 shape = SubResource("Shp_bone")
 
 [node name="Spr" type="Sprite2D" parent="Bones/Bone5" unique_id=1304148298]
-texture = ExtResource("6_ts")
-region_enabled = true
+scale = Vector2(0.313, 0.313)
+texture = ExtResource("4_c75a6")
 region_rect = Rect2(0, 32, 16, 16)
 
 [node name="Bone6" type="Area2D" parent="Bones" unique_id=667932684 groups=["bone"]]
 position = Vector2(1168, 177)
 script = ExtResource("3_bone")
 
-[node name="Col" type="CollisionShape2D" parent="Bones/Bone6" unique_id=266396763]
+[node name="Collider" type="CollisionShape2D" parent="Bones/Bone6" unique_id=266396763]
 shape = SubResource("Shp_bone")
 
 [node name="Spr" type="Sprite2D" parent="Bones/Bone6" unique_id=558411235]
-texture = ExtResource("6_ts")
-region_enabled = true
+scale = Vector2(0.313, 0.313)
+texture = ExtResource("4_c75a6")
 region_rect = Rect2(0, 32, 16, 16)
 
 [node name="Goal" type="Area2D" parent="." unique_id=1143446344]
@@ -148,7 +151,7 @@ script = ExtResource("4_goal")
 shape = SubResource("Shp_goal")
 
 [node name="Lulu" parent="." unique_id=641983539 instance=ExtResource("1_lulu")]
-position = Vector2(24, 180)
+position = Vector2(23, 183)
 scale = Vector2(0.14, 0.14)
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1054871263]
