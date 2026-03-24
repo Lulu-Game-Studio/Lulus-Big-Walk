@@ -1,171 +1,483 @@
-[gd_scene format=3 uid="uid://dna0j7ic47l3t"]
+[gd_scene format=3 uid="uid://ckvqh7fyom5aw"]
 
-[ext_resource type="PackedScene" uid="uid://sna6qk6kvv3y" path="res://scenes/player/Lulu.tscn" id="1_lulu"]
-[ext_resource type="Script" uid="uid://pkrrm4ghuya0" path="res://scenes/levels/Level1.gd" id="2_level"]
-[ext_resource type="Script" uid="uid://rr1mbwqk1lin" path="res://scenes/levels/Bone.gd" id="3_bone"]
-[ext_resource type="Texture2D" uid="uid://cfktntwdbrn6h" path="res://scenes/player/femur.png" id="4_c75a6"]
-[ext_resource type="Script" uid="uid://dwulutwj3arbe" path="res://scenes/levels/Goal.gd" id="4_goal"]
-[ext_resource type="Texture2D" uid="uid://level1bg001" path="res://assets/sprites/level1_bg.png" id="5_bg"]
+[ext_resource type="Texture2D" uid="uid://c18rat2n1rtjn" path="res://assets/sprites/sl_bg-clouds.png" id="bg_clouds"]
+[ext_resource type="Texture2D" uid="uid://7tq18outod73" path="res://assets/sprites/sl_bg-mountains.png" id="bg_mountains"]
+[ext_resource type="Texture2D" uid="uid://ut7nsfn6gcl7" path="res://assets/sprites/sl_bg-trees.png" id="bg_trees"]
+[ext_resource type="Script" uid="uid://rr1mbwqk1lin" path="res://scenes/levels/Bone.gd" id="bone_gd"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/Enemy.tscn" id="enemy_scn"]
+[ext_resource type="Texture2D" uid="uid://dtof0y1upkxge" path="res://assets/sprites/femur.png" id="femur_tex"]
+[ext_resource type="Script" uid="uid://dwulutwj3arbe" path="res://scenes/levels/Goal.gd" id="goal_gd"]
+[ext_resource type="Script" uid="uid://dpeo6mygequeo" path="res://scenes/levels/KillZone.gd" id="kill_gd"]
+[ext_resource type="Script" uid="uid://pkrrm4ghuya0" path="res://scenes/levels/Level1.gd" id="level_gd"]
+[ext_resource type="PackedScene" uid="uid://c17b6wt64nkwq" path="res://scenes/player/Lulu.tscn" id="lulu_scn"]
+[ext_resource type="AudioStream" uid="uid://c65gts1fbljn8" path="res://assets/audio/the_valley.ogg" id="music_ogg"]
+[ext_resource type="Texture2D" uid="uid://bie6xcder1job" path="res://assets/sprites/sl_tileset.png" id="tileset_tex"]
 
-[sub_resource type="RectangleShape2D" id="Shp_ground"]
-size = Vector2(1280, 64)
+[sub_resource type="TileSetAtlasSource" id="atlas_src"]
+texture = ExtResource("tileset_tex")
+15:2/0 = 0
+16:2/0 = 0
+17:2/0 = 0
+18:2/0 = 0
+19:2/0 = 0
+20:2/0 = 0
+15:3/0 = 0
+16:3/0 = 0
+17:3/0 = 0
+18:3/0 = 0
+19:3/0 = 0
+20:3/0 = 0
+24:2/0 = 0
+25:2/0 = 0
+15:4/0 = 0
+15:5/0 = 0
+15:6/0 = 0
+16:7/0 = 0
+16:8/0 = 0
+16:9/0 = 0
+17:7/0 = 0
+18:7/0 = 0
+19:7/0 = 0
+16:4/0 = 0
+17:4/0 = 0
+18:4/0 = 0
+19:4/0 = 0
+20:4/0 = 0
+15:10/0 = 0
+16:10/0 = 0
+17:10/0 = 0
+18:10/0 = 0
+19:10/0 = 0
+20:10/0 = 0
+20:11/0 = 0
+20:12/0 = 0
+19:12/0 = 0
+18:12/0 = 0
+17:12/0 = 0
+16:12/0 = 0
+15:12/0 = 0
+14:12/0 = 0
+14:11/0 = 0
+15:11/0 = 0
+16:11/0 = 0
+17:11/0 = 0
+18:11/0 = 0
+19:11/0 = 0
+21:11/0 = 0
 
-[sub_resource type="RectangleShape2D" id="Shp_p1"]
-size = Vector2(80, 6)
+[sub_resource type="TileSet" id="tileset"]
+sources/0 = SubResource("atlas_src")
 
-[sub_resource type="RectangleShape2D" id="Shp_p2"]
-size = Vector2(80, 6)
+[sub_resource type="RectangleShape2D" id="gnd_shape"]
+size = Vector2(3840, 192)
 
-[sub_resource type="RectangleShape2D" id="Shp_p3"]
-size = Vector2(80, 6)
+[sub_resource type="RectangleShape2D" id="plat_shape_0"]
+size = Vector2(288, 48)
 
-[sub_resource type="CircleShape2D" id="Shp_bone"]
-radius = 7.0
+[sub_resource type="RectangleShape2D" id="plat_shape_1"]
+size = Vector2(288, 48)
 
-[sub_resource type="RectangleShape2D" id="Shp_goal"]
-size = Vector2(32, 48)
+[sub_resource type="RectangleShape2D" id="plat_shape_2"]
+size = Vector2(288, 48)
 
-[node name="Level1Park" type="Node2D" unique_id=1930127032]
-script = ExtResource("2_level")
+[sub_resource type="RectangleShape2D" id="plat_shape_3"]
+size = Vector2(288, 48)
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1868559207]
-position = Vector2(120, 128)
-zoom = Vector2(2.5, 2.5)
+[sub_resource type="RectangleShape2D" id="plat_shape_4"]
+size = Vector2(288, 48)
+
+[sub_resource type="RectangleShape2D" id="plat_shape_5"]
+size = Vector2(288, 48)
+
+[sub_resource type="RectangleShape2D" id="plat_shape_6"]
+size = Vector2(288, 48)
+
+[sub_resource type="RectangleShape2D" id="kill_shape"]
+size = Vector2(7680, 32)
+
+[sub_resource type="CircleShape2D" id="bone_shape"]
+radius = 12.0
+
+[sub_resource type="RectangleShape2D" id="goal_shape"]
+size = Vector2(144, 192)
+
+[node name="Level1Park" type="Node2D" unique_id=532188233]
+script = ExtResource("level_gd")
+
+[node name="Sky" type="ColorRect" parent="." unique_id=1576449657]
+z_index = -10
+offset_left = -320.0
+offset_top = -400.0
+offset_right = 4160.0
+offset_bottom = 500.0
+color = Color(0.45, 0.72, 0.98, 1)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=1428753713]
+
+[node name="CloudsLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=135639899]
+motion_scale = Vector2(0.05, 0)
+motion_mirroring = Vector2(480, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/CloudsLayer" unique_id=1561602898]
+position = Vector2(240, 202)
+scale = Vector2(3, 3)
+texture = ExtResource("bg_clouds")
+
+[node name="MountainsLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1133447868]
+motion_scale = Vector2(0.15, 0)
+motion_mirroring = Vector2(480, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/MountainsLayer" unique_id=1289287700]
+position = Vector2(240, 202)
+scale = Vector2(3, 3)
+texture = ExtResource("bg_mountains")
+
+[node name="TreesLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=75681483]
+motion_scale = Vector2(0.3, 0)
+motion_mirroring = Vector2(480, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/TreesLayer" unique_id=1754112447]
+position = Vector2(240, 202)
+scale = Vector2(3, 3)
+texture = ExtResource("bg_trees")
+
+[node name="TileMap" type="TileMap" parent="." unique_id=509439837]
+scale = Vector2(3, 3)
+tile_set = SubResource("tileset")
+format = 2
+layer_0/tile_data = PackedInt32Array(786432, 983040, 2, 851968, 983040, 3, 917504, 983040, 4, 983040, 983040, 3, 1048576, 983040, 4, 786433, 1048576, 2, 851969, 1048576, 3, 917505, 1048576, 4, 983041, 1048576, 3, 1048577, 1048576, 4, 786434, 1114112, 2, 851970, 1114112, 3, 917506, 1114112, 4, 983042, 1114112, 3, 1048578, 1114112, 4, 786435, 1179648, 2, 851971, 0, 196626, 917507, 0, 196626, 983043, 0, 196626, 1048579, 0, 196626, 786436, 1179648, 2, 851972, 0, 196627, 917508, 0, 196627, 983044, 0, 196627, 1048580, 0, 196627, 786437, 1245184, 2, 851973, 0, 196628, 917509, 0, 196628, 983045, 0, 196628, 1048581, 0, 196628, 786438, 1179648, 10, 851974, 983040, 3, 917510, 983040, 3, 983046, 983040, 3, 1048582, 983040, 4, 786439, 1245184, 10, 851975, 1048576, 3, 917511, 1048576, 3, 983047, 1048576, 3, 1048583, 1048576, 4, 786440, 1114112, 2, 851976, 1114112, 3, 917512, 1114112, 3, 983048, 1114112, 3, 1048584, 1114112, 4, 786441, 1245184, 2, 851977, 0, 196626, 917513, 0, 196626, 983049, 0, 196626, 1048585, 0, 196626, 786442, 1179648, 2, 851978, 0, 196627, 917514, 0, 196627, 983050, 0, 196627, 1048586, 0, 196627, 786443, 1245184, 2, 851979, 0, 196628, 917515, 0, 196628, 983051, 0, 196628, 1048587, 0, 196628, 786444, 983040, 2, 851980, 983040, 3, 917516, 983040, 3, 983052, 983040, 4, 1048588, 0, 196623, 786445, 1048576, 2, 851981, 1048576, 3, 917517, 1048576, 3, 983053, 1048576, 4, 1048589, 0, 196624, 786446, 1114112, 2, 851982, 1114112, 3, 917518, 1114112, 3, 983054, 1114112, 4, 1048590, 0, 196625, 786447, 1245184, 2, 851983, 0, 196626, 917519, 0, 196626, 983055, 0, 196626, 1048591, 0, 196626, 786448, 1179648, 2, 851984, 0, 196627, 917520, 0, 196627, 983056, 0, 196627, 1048592, 0, 196627, 786449, 1245184, 2, 851985, 0, 196628, 917521, 0, 196628, 983057, 0, 196628, 1048593, 0, 196628, 786450, 983040, 2, 851986, 983040, 3, 917522, 983040, 3, 983058, 983040, 4, 1048594, 0, 196623, 786451, 1048576, 2, 851987, 1048576, 3, 917523, 1048576, 3, 983059, 1048576, 4, 1048595, 0, 196624, 786452, 1114112, 2, 851988, 1114112, 3, 917524, 1114112, 3, 983060, 1114112, 4, 1048596, 0, 196625, 786453, 1245184, 2, 851989, 0, 196626, 917525, 0, 196626, 983061, 0, 196626, 1048597, 0, 196626, 786454, 1179648, 2, 851990, 0, 196627, 917526, 0, 196627, 983062, 0, 196627, 1048598, 0, 196627, 786455, 1245184, 2, 851991, 0, 196628, 917527, 0, 196628, 983063, 0, 196628, 1048599, 0, 196628, 786456, 983040, 2, 851992, 983040, 3, 917528, 983040, 3, 983064, 983040, 4, 1048600, 0, 196623, 786457, 1048576, 2, 851993, 1048576, 3, 917529, 1048576, 3, 983065, 1048576, 4, 1048601, 0, 196624, 786458, 1114112, 2, 851994, 1114112, 3, 917530, 1114112, 3, 983066, 1114112, 4, 1048602, 0, 196625, 786459, 1245184, 2, 851995, 0, 196626, 917531, 0, 196626, 983067, 0, 196626, 1048603, 0, 196626, 786460, 1179648, 2, 851996, 0, 196627, 917532, 0, 196627, 983068, 0, 196627, 1048604, 0, 196627, 786461, 1245184, 2, 851997, 0, 196628, 917533, 0, 196628, 983069, 0, 196628, 1048605, 0, 196628, 786462, 983040, 2, 851998, 983040, 3, 917534, 983040, 3, 983070, 983040, 4, 1048606, 0, 196623, 786463, 1048576, 2, 851999, 1048576, 3, 917535, 1048576, 3, 983071, 1048576, 4, 1048607, 0, 196624, 786464, 1114112, 2, 852000, 1114112, 3, 917536, 1114112, 3, 983072, 1114112, 4, 1048608, 0, 196625, 786465, 1245184, 2, 852001, 0, 196626, 917537, 0, 196626, 983073, 0, 196626, 1048609, 0, 196626, 786466, 1179648, 2, 852002, 0, 196627, 917538, 0, 196627, 983074, 0, 196627, 1048610, 0, 196627, 786467, 1245184, 2, 852003, 0, 196628, 917539, 0, 196628, 983075, 0, 196628, 1048611, 0, 196628, 786468, 983040, 2, 852004, 983040, 3, 917540, 983040, 3, 983076, 983040, 4, 1048612, 0, 196623, 786469, 1048576, 2, 852005, 1048576, 3, 917541, 1048576, 3, 983077, 1048576, 4, 1048613, 0, 196624, 786470, 1114112, 2, 852006, 1114112, 3, 917542, 1114112, 3, 983078, 1114112, 4, 1048614, 0, 196625, 786471, 1245184, 2, 852007, 0, 196626, 917543, 0, 196626, 983079, 0, 196626, 1048615, 0, 196626, 786472, 1179648, 2, 852008, 0, 196627, 917544, 0, 196627, 983080, 0, 196627, 1048616, 0, 196627, 786473, 1245184, 2, 852009, 0, 196628, 917545, 0, 196628, 983081, 0, 196628, 1048617, 0, 196628, 786474, 983040, 2, 852010, 983040, 3, 917546, 983040, 3, 983082, 983040, 4, 1048618, 0, 196623, 786475, 1048576, 2, 852011, 1048576, 3, 917547, 1048576, 3, 983083, 1048576, 4, 1048619, 0, 196624, 786476, 1114112, 2, 852012, 1114112, 3, 917548, 1114112, 3, 983084, 1114112, 4, 1048620, 0, 196625, 786477, 1245184, 2, 852013, 0, 196626, 917549, 0, 196626, 983085, 0, 196626, 1048621, 0, 196626, 786478, 1179648, 2, 852014, 0, 196627, 917550, 0, 196627, 983086, 0, 196627, 1048622, 0, 196627, 786479, 983040, 2, 852015, 983040, 3, 917551, 983040, 3, 983087, 983040, 4, 1048623, 0, 196628, 786480, 1048576, 2, 852016, 1048576, 3, 917552, 1048576, 3, 983088, 1048576, 4, 1048624, 0, 196623, 786481, 1114112, 2, 852017, 1114112, 3, 917553, 1114112, 3, 983089, 1114112, 4, 1048625, 0, 196624, 786482, 1179648, 2, 852018, 0, 196625, 917554, 0, 196625, 983090, 0, 196625, 1048626, 0, 196625, 786483, 1245184, 2, 852019, 0, 196626, 917555, 0, 196626, 983091, 0, 196626, 1048627, 0, 196626, 786484, 983040, 2, 852020, 983040, 3, 917556, 983040, 3, 983092, 983040, 4, 1048628, 0, 196627, 786485, 1048576, 2, 852021, 1048576, 3, 917557, 1048576, 3, 983093, 1048576, 4, 1048629, 0, 196628, 786486, 1114112, 2, 852022, 1114112, 3, 917558, 1114112, 3, 983094, 1114112, 4, 1048630, 0, 196623, 786487, 1245184, 2, 852023, 0, 196624, 917559, 0, 196624, 983095, 0, 196624, 1048631, 0, 196624, 786488, 1179648, 2, 852024, 0, 196625, 917560, 0, 196625, 983096, 0, 196625, 1048632, 0, 196625, 786489, 1245184, 2, 852025, 0, 196626, 917561, 0, 196626, 983097, 0, 196626, 1048633, 0, 196626, 786490, 983040, 2, 852026, 983040, 3, 917562, 983040, 3, 983098, 983040, 4, 1048634, 0, 196627, 786491, 1048576, 2, 852027, 1048576, 3, 917563, 1048576, 3, 983099, 1048576, 4, 1048635, 0, 196628, 786492, 1114112, 2, 852028, 1114112, 3, 917564, 1114112, 3, 983100, 1114112, 4, 1048636, 0, 196623, 786493, 983040, 2, 852029, 983040, 3, 917565, 983040, 3, 983101, 983040, 4, 1048637, 0, 196624, 786494, 1048576, 2, 852030, 1048576, 3, 917566, 1048576, 3, 983102, 1048576, 4, 1048638, 0, 196625, 786495, 1114112, 2, 852031, 1114112, 3, 917567, 1114112, 3, 983103, 1114112, 4, 1048639, 0, 196626, 786496, 1179648, 2, 852032, 0, 196627, 917568, 0, 196627, 983104, 0, 196627, 1048640, 0, 196627, 786497, 1245184, 2, 852033, 0, 196628, 917569, 0, 196628, 983105, 0, 196628, 1048641, 0, 196628, 786498, 983040, 2, 852034, 983040, 3, 917570, 983040, 3, 983106, 983040, 4, 1048642, 0, 196623, 786499, 1048576, 2, 852035, 1048576, 3, 917571, 1048576, 3, 983107, 1048576, 4, 1048643, 0, 196624, 786500, 1114112, 2, 852036, 1114112, 3, 917572, 1114112, 3, 983108, 1114112, 4, 1048644, 0, 196625, 786501, 1245184, 2, 852037, 0, 196626, 917573, 0, 196626, 983109, 0, 196626, 1048645, 0, 196626, 786502, 1179648, 2, 852038, 0, 196627, 917574, 0, 196627, 983110, 0, 196627, 1048646, 0, 196627, 786503, 1245184, 2, 852039, 0, 196628, 917575, 0, 196628, 983111, 0, 196628, 1048647, 0, 196628, 786504, 983040, 2, 852040, 983040, 3, 917576, 983040, 3, 983112, 983040, 4, 1048648, 0, 196623, 786505, 1048576, 2, 852041, 1048576, 3, 917577, 1048576, 3, 983113, 1048576, 4, 1048649, 0, 196624, 786506, 1114112, 2, 852042, 1114112, 3, 917578, 1114112, 3, 983114, 1114112, 4, 1048650, 0, 196625, 786507, 1245184, 2, 852043, 0, 196626, 917579, 0, 196626, 983115, 0, 196626, 1048651, 0, 196626, 786508, 1179648, 2, 852044, 0, 196627, 917580, 0, 196627, 983116, 0, 196627, 1048652, 0, 196627, 786509, 983040, 2, 852045, 983040, 3, 917581, 983040, 3, 983117, 983040, 4, 1048653, 0, 196628, 786510, 1048576, 2, 852046, 1048576, 3, 917582, 1048576, 3, 983118, 1048576, 4, 1048654, 0, 196623, 786511, 1114112, 2, 852047, 1114112, 3, 917583, 1114112, 3, 983119, 1114112, 4, 1048655, 0, 196624, 589832, 0, 131096, 589833, 0, 131097, 589834, 0, 131097, 589835, 0, 131097, 589836, 0, 131097, 589837, 0, 131097, 458770, 0, 131096, 458771, 0, 131097, 458772, 0, 131097, 458773, 0, 131097, 458774, 0, 131097, 458775, 0, 131097, 589852, 0, 131096, 589853, 0, 131097, 589854, 0, 131097, 589855, 0, 131097, 589856, 0, 131097, 589857, 0, 131097, 458790, 0, 131096, 458791, 0, 131097, 458792, 0, 131097, 458793, 0, 131097, 458794, 0, 131097, 458795, 0, 131097, 589874, 0, 131096, 589875, 0, 131097, 589876, 0, 131097, 589877, 0, 131097, 589878, 0, 131097, 589879, 0, 131097, 458812, 0, 131096, 458813, 0, 131097, 458814, 0, 131097, 458815, 0, 131097, 458816, 0, 131097, 458817, 0, 131097, 589894, 0, 131096, 589895, 0, 131097, 589896, 0, 131097, 589897, 0, 131097, 589898, 0, 131097, 589899, 0, 131097)
+
+[node name="GroundBody" type="StaticBody2D" parent="." unique_id=1505336319]
+
+[node name="GroundShape" type="CollisionShape2D" parent="GroundBody" unique_id=176738946]
+position = Vector2(1920, 672)
+shape = SubResource("gnd_shape")
+
+[node name="Platform0" type="StaticBody2D" parent="." unique_id=1555018215]
+
+[node name="Shape" type="CollisionShape2D" parent="Platform0" unique_id=1136519182]
+position = Vector2(528, 432)
+shape = SubResource("plat_shape_0")
+
+[node name="Platform1" type="StaticBody2D" parent="." unique_id=785167787]
+
+[node name="Shape" type="CollisionShape2D" parent="Platform1" unique_id=1817294938]
+position = Vector2(1008, 336)
+shape = SubResource("plat_shape_1")
+
+[node name="Platform2" type="StaticBody2D" parent="." unique_id=843498943]
+
+[node name="Shape" type="CollisionShape2D" parent="Platform2" unique_id=759808155]
+position = Vector2(1488, 432)
+shape = SubResource("plat_shape_2")
+
+[node name="Platform3" type="StaticBody2D" parent="." unique_id=105173242]
+
+[node name="Shape" type="CollisionShape2D" parent="Platform3" unique_id=883106230]
+position = Vector2(1968, 336)
+shape = SubResource("plat_shape_3")
+
+[node name="Platform4" type="StaticBody2D" parent="." unique_id=498147603]
+
+[node name="Shape" type="CollisionShape2D" parent="Platform4" unique_id=17712031]
+position = Vector2(2544, 432)
+shape = SubResource("plat_shape_4")
+
+[node name="Platform5" type="StaticBody2D" parent="." unique_id=1286845457]
+
+[node name="Shape" type="CollisionShape2D" parent="Platform5" unique_id=1281933104]
+position = Vector2(3024, 336)
+shape = SubResource("plat_shape_5")
+
+[node name="Platform6" type="StaticBody2D" parent="." unique_id=2101062362]
+
+[node name="Shape" type="CollisionShape2D" parent="Platform6" unique_id=1654181978]
+position = Vector2(3504, 432)
+shape = SubResource("plat_shape_6")
+
+[node name="KillZone" type="Area2D" parent="." unique_id=907335244]
+script = ExtResource("kill_gd")
+
+[node name="KillShape" type="CollisionShape2D" parent="KillZone" unique_id=779267137]
+position = Vector2(1920, 1008)
+shape = SubResource("kill_shape")
+
+[node name="Bones" type="Node2D" parent="." unique_id=419604348]
+
+[node name="Bone0" type="Area2D" parent="Bones" unique_id=2022332624]
+position = Vector2(144, 528)
+script = ExtResource("bone_gd")
+
+[node name="Shape" type="CollisionShape2D" parent="Bones/Bone0" unique_id=835560792]
+shape = SubResource("bone_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bones/Bone0" unique_id=1966332885]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("femur_tex")
+
+[node name="Bone1" type="Area2D" parent="Bones" unique_id=306605901]
+position = Vector2(288, 528)
+script = ExtResource("bone_gd")
+
+[node name="Shape" type="CollisionShape2D" parent="Bones/Bone1" unique_id=1111357222]
+shape = SubResource("bone_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bones/Bone1" unique_id=1039511011]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("femur_tex")
+
+[node name="Bone2" type="Area2D" parent="Bones" unique_id=1503278264]
+position = Vector2(480, 384)
+script = ExtResource("bone_gd")
+
+[node name="Shape" type="CollisionShape2D" parent="Bones/Bone2" unique_id=276734962]
+shape = SubResource("bone_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bones/Bone2" unique_id=29568194]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("femur_tex")
+
+[node name="Bone3" type="Area2D" parent="Bones" unique_id=720039497]
+position = Vector2(720, 480)
+script = ExtResource("bone_gd")
+
+[node name="Shape" type="CollisionShape2D" parent="Bones/Bone3" unique_id=501726478]
+shape = SubResource("bone_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bones/Bone3" unique_id=1389567832]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("femur_tex")
+
+[node name="Bone4" type="Area2D" parent="Bones" unique_id=1861325647]
+position = Vector2(960, 288)
+script = ExtResource("bone_gd")
+
+[node name="Shape" type="CollisionShape2D" parent="Bones/Bone4" unique_id=1719885371]
+shape = SubResource("bone_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bones/Bone4" unique_id=398304929]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("femur_tex")
+
+[node name="Bone5" type="Area2D" parent="Bones" unique_id=542270153]
+position = Vector2(1200, 480)
+script = ExtResource("bone_gd")
+
+[node name="Shape" type="CollisionShape2D" parent="Bones/Bone5" unique_id=253839061]
+shape = SubResource("bone_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bones/Bone5" unique_id=1830216178]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("femur_tex")
+
+[node name="Bone6" type="Area2D" parent="Bones" unique_id=865656361]
+position = Vector2(1440, 384)
+script = ExtResource("bone_gd")
+
+[node name="Shape" type="CollisionShape2D" parent="Bones/Bone6" unique_id=43880804]
+shape = SubResource("bone_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bones/Bone6" unique_id=1704344556]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("femur_tex")
+
+[node name="Bone7" type="Area2D" parent="Bones" unique_id=1380773540]
+position = Vector2(1824, 480)
+script = ExtResource("bone_gd")
+
+[node name="Shape" type="CollisionShape2D" parent="Bones/Bone7" unique_id=942124602]
+shape = SubResource("bone_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bones/Bone7" unique_id=1544013463]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("femur_tex")
+
+[node name="Bone8" type="Area2D" parent="Bones" unique_id=1785129231]
+position = Vector2(1968, 288)
+script = ExtResource("bone_gd")
+
+[node name="Shape" type="CollisionShape2D" parent="Bones/Bone8" unique_id=162755426]
+shape = SubResource("bone_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bones/Bone8" unique_id=630569448]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("femur_tex")
+
+[node name="Bone9" type="Area2D" parent="Bones" unique_id=922356815]
+position = Vector2(2304, 480)
+script = ExtResource("bone_gd")
+
+[node name="Shape" type="CollisionShape2D" parent="Bones/Bone9" unique_id=849214341]
+shape = SubResource("bone_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bones/Bone9" unique_id=827470102]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("femur_tex")
+
+[node name="Bone10" type="Area2D" parent="Bones" unique_id=1454869014]
+position = Vector2(2496, 384)
+script = ExtResource("bone_gd")
+
+[node name="Shape" type="CollisionShape2D" parent="Bones/Bone10" unique_id=783360934]
+shape = SubResource("bone_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bones/Bone10" unique_id=1410216764]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("femur_tex")
+
+[node name="Bone11" type="Area2D" parent="Bones" unique_id=1282563541]
+position = Vector2(2784, 480)
+script = ExtResource("bone_gd")
+
+[node name="Shape" type="CollisionShape2D" parent="Bones/Bone11" unique_id=1708376676]
+shape = SubResource("bone_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bones/Bone11" unique_id=222041102]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("femur_tex")
+
+[node name="Bone12" type="Area2D" parent="Bones" unique_id=1734256812]
+position = Vector2(2976, 288)
+script = ExtResource("bone_gd")
+
+[node name="Shape" type="CollisionShape2D" parent="Bones/Bone12" unique_id=569784917]
+shape = SubResource("bone_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bones/Bone12" unique_id=926913790]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("femur_tex")
+
+[node name="Bone13" type="Area2D" parent="Bones" unique_id=1725596319]
+position = Vector2(3264, 480)
+script = ExtResource("bone_gd")
+
+[node name="Shape" type="CollisionShape2D" parent="Bones/Bone13" unique_id=442331135]
+shape = SubResource("bone_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bones/Bone13" unique_id=547575421]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("femur_tex")
+
+[node name="Bone14" type="Area2D" parent="Bones" unique_id=1600461563]
+position = Vector2(3456, 384)
+script = ExtResource("bone_gd")
+
+[node name="Shape" type="CollisionShape2D" parent="Bones/Bone14" unique_id=221716985]
+shape = SubResource("bone_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bones/Bone14" unique_id=1339282513]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("femur_tex")
+
+[node name="Enemies" type="Node2D" parent="." unique_id=1495305528]
+
+[node name="Enemy0" parent="Enemies" unique_id=1214257345 instance=ExtResource("enemy_scn")]
+position = Vector2(528, 384)
+
+[node name="Enemy1" parent="Enemies" unique_id=1701659233 instance=ExtResource("enemy_scn")]
+position = Vector2(960, 288)
+
+[node name="Enemy2" parent="Enemies" unique_id=798481079 instance=ExtResource("enemy_scn")]
+position = Vector2(1440, 384)
+
+[node name="Enemy3" parent="Enemies" unique_id=1479668275 instance=ExtResource("enemy_scn")]
+position = Vector2(1968, 288)
+
+[node name="Enemy4" parent="Enemies" unique_id=241519180 instance=ExtResource("enemy_scn")]
+position = Vector2(2496, 384)
+
+[node name="Enemy5" parent="Enemies" unique_id=1066060381 instance=ExtResource("enemy_scn")]
+position = Vector2(2976, 288)
+
+[node name="Enemy6" parent="Enemies" unique_id=1925994604 instance=ExtResource("enemy_scn")]
+position = Vector2(3456, 384)
+
+[node name="Goal" type="Area2D" parent="." unique_id=185832407]
+position = Vector2(3648, 384)
+script = ExtResource("goal_gd")
+
+[node name="Shape" type="CollisionShape2D" parent="Goal" unique_id=1801060526]
+position = Vector2(72, 96)
+shape = SubResource("goal_shape")
+
+[node name="Pole" type="ColorRect" parent="Goal" unique_id=1034227924]
+offset_right = 5.0
+offset_bottom = 192.0
+color = Color(0.65, 0.65, 0.7, 1)
+
+[node name="Flag" type="ColorRect" parent="Goal" unique_id=198494180]
+offset_left = 5.0
+offset_top = 4.0
+offset_right = 33.0
+offset_bottom = 22.0
+color = Color(1, 0.85, 0, 0.95)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1717810005]
+position = Vector2(200, 500)
 limit_left = 0
-limit_top = -32
-limit_right = 1280
-limit_bottom = 300
-drag_horizontal_enabled = true
+limit_top = -300
+limit_right = 4040
+limit_bottom = 864
 
-[node name="BgSprite" type="Sprite2D" parent="." unique_id=477014021]
-z_index = -1
-position = Vector2(640, 128)
-texture = ExtResource("5_bg")
+[node name="Lulu" parent="." unique_id=1119067161 instance=ExtResource("lulu_scn")]
+position = Vector2(80, 540)
 
-[node name="Ground" type="StaticBody2D" parent="." unique_id=1762753718]
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1588044671]
+stream = ExtResource("music_ogg")
+volume_db = -8.0
 
-[node name="Collider" type="CollisionShape2D" parent="Ground" unique_id=1362660153]
-position = Vector2(640, 224)
-shape = SubResource("Shp_ground")
+[node name="HUD" type="CanvasLayer" parent="." unique_id=376145365]
 
-[node name="Platform1" type="StaticBody2D" parent="." unique_id=157452691]
+[node name="BG" type="ColorRect" parent="HUD" unique_id=641037685]
+offset_right = 1280.0
+offset_bottom = 60.0
+color = Color(0.08, 0.06, 0.04, 0.72)
 
-[node name="Collider" type="CollisionShape2D" parent="Platform1" unique_id=1579407974]
-position = Vector2(328, 147)
-shape = SubResource("Shp_p1")
-
-[node name="Platform2" type="StaticBody2D" parent="." unique_id=1945742456]
-
-[node name="Collider" type="CollisionShape2D" parent="Platform2" unique_id=323268014]
-position = Vector2(552, 115)
-shape = SubResource("Shp_p2")
-
-[node name="Platform3" type="StaticBody2D" parent="." unique_id=1007701587]
-
-[node name="Collider" type="CollisionShape2D" parent="Platform3" unique_id=1829130769]
-position = Vector2(840, 83)
-shape = SubResource("Shp_p3")
-
-[node name="Bones" type="Node2D" parent="." unique_id=1667051459]
-
-[node name="Bone1" type="Area2D" parent="Bones" unique_id=423393145 groups=["bone"]]
-position = Vector2(112, 177)
-script = ExtResource("3_bone")
-
-[node name="Collider" type="CollisionShape2D" parent="Bones/Bone1" unique_id=1848369619]
-shape = SubResource("Shp_bone")
-
-[node name="Spr" type="Sprite2D" parent="Bones/Bone1" unique_id=1105359953]
-position = Vector2(1.9073486e-06, -0.9999957)
-scale = Vector2(0.3125, 0.31249982)
-texture = ExtResource("4_c75a6")
-region_rect = Rect2(0, 32, 16, 16)
-
-[node name="Bone2" type="Area2D" parent="Bones" unique_id=1782633930 groups=["bone"]]
-position = Vector2(304, 177)
-script = ExtResource("3_bone")
-
-[node name="Collider" type="CollisionShape2D" parent="Bones/Bone2" unique_id=1424935236]
-shape = SubResource("Shp_bone")
-
-[node name="Spr" type="Sprite2D" parent="Bones/Bone2" unique_id=496829442]
-position = Vector2(-1, 7.6293945e-06)
-scale = Vector2(0.313, 0.3260001)
-texture = ExtResource("4_c75a6")
-region_rect = Rect2(0, 32, 16, 16)
-
-[node name="Bone3" type="Area2D" parent="Bones" unique_id=1045391172 groups=["bone"]]
-position = Vector2(304, 137)
-script = ExtResource("3_bone")
-
-[node name="Collider" type="CollisionShape2D" parent="Bones/Bone3" unique_id=433759548]
-shape = SubResource("Shp_bone")
-
-[node name="Spr" type="Sprite2D" parent="Bones/Bone3" unique_id=871473776]
-position = Vector2(-9.536743e-07, -2.861023e-06)
-scale = Vector2(0.313, 0.3156667)
-texture = ExtResource("4_c75a6")
-region_rect = Rect2(0, 32, 16, 16)
-
-[node name="Bone4" type="Area2D" parent="Bones" unique_id=278993293 groups=["bone"]]
-position = Vector2(528, 105)
-script = ExtResource("3_bone")
-
-[node name="Collider" type="CollisionShape2D" parent="Bones/Bone4" unique_id=1783092970]
-shape = SubResource("Shp_bone")
-
-[node name="Spr" type="Sprite2D" parent="Bones/Bone4" unique_id=290010909]
-scale = Vector2(0.313, 0.313)
-texture = ExtResource("4_c75a6")
-region_rect = Rect2(0, 32, 16, 16)
-
-[node name="Bone5" type="Area2D" parent="Bones" unique_id=446596137 groups=["bone"]]
-position = Vector2(832, 73)
-script = ExtResource("3_bone")
-
-[node name="Collider" type="CollisionShape2D" parent="Bones/Bone5" unique_id=1275226074]
-shape = SubResource("Shp_bone")
-
-[node name="Spr" type="Sprite2D" parent="Bones/Bone5" unique_id=1304148298]
-scale = Vector2(0.313, 0.313)
-texture = ExtResource("4_c75a6")
-region_rect = Rect2(0, 32, 16, 16)
-
-[node name="Bone6" type="Area2D" parent="Bones" unique_id=667932684 groups=["bone"]]
-position = Vector2(1168, 177)
-script = ExtResource("3_bone")
-
-[node name="Collider" type="CollisionShape2D" parent="Bones/Bone6" unique_id=266396763]
-shape = SubResource("Shp_bone")
-
-[node name="Spr" type="Sprite2D" parent="Bones/Bone6" unique_id=558411235]
-scale = Vector2(0.313, 0.313)
-texture = ExtResource("4_c75a6")
-region_rect = Rect2(0, 32, 16, 16)
-
-[node name="Goal" type="Area2D" parent="." unique_id=1143446344]
-position = Vector2(1216, 152)
-script = ExtResource("4_goal")
-
-[node name="Col" type="CollisionShape2D" parent="Goal" unique_id=304326960]
-shape = SubResource("Shp_goal")
-
-[node name="Lulu" parent="." unique_id=641983539 instance=ExtResource("1_lulu")]
-position = Vector2(23, 183)
-scale = Vector2(0.14, 0.14)
-
-[node name="HUD" type="CanvasLayer" parent="." unique_id=1054871263]
-
-[node name="Panel" type="Panel" parent="HUD" unique_id=741401277]
-offset_left = 8.0
+[node name="Stats" type="HBoxContainer" parent="HUD" unique_id=1665403494]
+offset_left = 12.0
 offset_top = 8.0
-offset_right = 180.0
-offset_bottom = 40.0
+offset_right = 700.0
+offset_bottom = 50.0
+theme_override_constants/separation = 28
 
-[node name="BoneLabel" type="Label" parent="HUD" unique_id=870920194]
-offset_left = 16.0
-offset_top = 14.0
-offset_right = 176.0
-offset_bottom = 36.0
-theme_override_font_sizes/font_size = 14
-text = "Huesos: 0 / 6"
+[node name="BoneLabel" type="Label" parent="HUD/Stats" unique_id=2109578330]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "🦴 0"
+
+[node name="DistLabel" type="Label" parent="HUD/Stats" unique_id=1424199211]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "📍 0m"
+
+[node name="ScoreLabel" type="Label" parent="HUD/Stats" unique_id=1318234906]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "⭐ 0"
+
+[node name="MischiefBar" type="ProgressBar" parent="HUD" unique_id=170326108]
+offset_left = 12.0
+offset_top = 52.0
+offset_right = 260.0
+offset_bottom = 68.0
+max_value = 10.0
+show_percentage = false
+
+[node name="MischiefBG" type="Label" parent="HUD" unique_id=1968518386]
+offset_left = 12.0
+offset_top = 54.0
+offset_right = 110.0
+offset_bottom = 72.0
+theme_override_font_sizes/font_size = 13
+text = "🐾 LULU"
+
+[node name="FrenzyLabel" type="Label" parent="HUD" unique_id=1666194458]
+visible = false
+offset_left = 440.0
+offset_top = 12.0
+offset_right = 840.0
+offset_bottom = 48.0
+theme_override_colors/font_color = Color(1, 0.8, 0.1, 1)
+theme_override_font_sizes/font_size = 28
+text = "🐾 DOG FRENZY! 🐾"
+horizontal_alignment = 1
