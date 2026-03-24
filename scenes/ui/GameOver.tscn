@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://b3sqmtcxhahut"]
+
+[ext_resource type="Script" uid="uid://dpbdetc48y0vu" path="res://scenes/ui/GameOver.gd" id="1_go"]
+[ext_resource type="Texture2D" uid="uid://ddqgqhynrcqj2" path="res://assets/sprites/gameOVER.png" id="2_57v1k"]
+
+[node name="GameOver" type="Node" unique_id=161767404]
+script = ExtResource("1_go")
+
+[node name="BG" type="ColorRect" parent="." unique_id=861120762]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.06, 0.03, 0.03, 1)
+
+[node name="StatsContainer" type="VBoxContainer" parent="." unique_id=1361219179]
+offset_left = 494.0
+offset_top = 290.0
+offset_right = 794.0
+offset_bottom = 430.0
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="StatsContainer" unique_id=342969575]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "⭐  0"
+horizontal_alignment = 1
+
+[node name="DistLabel" type="Label" parent="StatsContainer" unique_id=740133944]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "📍  0 m"
+horizontal_alignment = 1
+
+[node name="BoneLabel" type="Label" parent="StatsContainer" unique_id=1909495435]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "🦴  0 huesos"
+horizontal_alignment = 1
+
+[node name="HighscoreLabel" type="Label" parent="StatsContainer" unique_id=1315256299]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.2, 1)
+theme_override_font_sizes/font_size = 18
+text = "🏆  Récord: 0"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1362705536]
+offset_left = 501.0
+offset_top = 443.0
+offset_right = 801.0
+offset_bottom = 571.0
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="RetryButton" type="Button" parent="VBoxContainer" unique_id=131978450]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "REINTENTAR"
+
+[node name="MenuButton" type="Button" parent="VBoxContainer" unique_id=31556766]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "MENÚ PRINCIPAL"
+
+[node name="GameOver" type="Sprite2D" parent="." unique_id=485650783]
+position = Vector2(653, 190)
+scale = Vector2(0.27213544, 0.26171875)
+texture = ExtResource("2_57v1k")
