@@ -1,0 +1,28 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/enemies/Enemy.gd" id="1_en"]
+[ext_resource type="SpriteFrames" path="res://assets/spriteframes/enemy_frames.tres" id="2_sf"]
+
+[sub_resource type="RectangleShape2D" id="EnemyBody"]
+size = Vector2(28, 28)
+
+[sub_resource type="RectangleShape2D" id="HitboxShape"]
+size = Vector2(34, 34)
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_en")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_sf")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("EnemyBody")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="HitboxShape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 4)
+shape = SubResource("HitboxShape")
