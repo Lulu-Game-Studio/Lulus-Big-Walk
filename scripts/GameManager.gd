@@ -59,12 +59,17 @@ func go_to_game_over() -> void:
 func go_to_menu() -> void:
 	get_tree().change_scene_to_file("res://scenes/ui/MainMenu.tscn")
 
+func go_to_you_win() -> void:
+	get_tree().change_scene_to_file("res://scenes/ui/YouWin.tscn")
+
 func complete_level() -> void:
 	if current_level >= levels_unlocked:
 		levels_unlocked = current_level + 1
 		_save()
 	var next := current_level + 1
 	if LEVELS.has(next):
-		go_to_level(next)
+		# Show win screen; it will auto-advance to next level
+		go_to_you_win()
 	else:
-		go_to_menu()
+		# Completed all levels
+		go_to_you_win()

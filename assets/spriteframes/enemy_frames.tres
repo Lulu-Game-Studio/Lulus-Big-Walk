@@ -1,9 +1,9 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://ncd6s7n6fwun"]
 
-[ext_resource type="Texture2D" uid="uid://bqx216osy7xdb" path="res://assets/sprites/sl_grass_idle.png" id="1_gidle"]
-[ext_resource type="Texture2D" uid="uid://bagfa3sxvdvvu" path="res://assets/sprites/sl_grass_jump.png" id="2_gjump"]
-[ext_resource type="Texture2D" uid="uid://t4bihywj1e1d" path="res://assets/sprites/sl_grass_fall.png" id="3_gfall"]
-[ext_resource type="Texture2D" uid="uid://b40gxhlvoi1vg" path="res://assets/sprites/sl_death.png" id="4_death"]
+[ext_resource type="Texture2D" uid="uid://bqx216osy7xdb" path="res://assets/sprites/level1/sl_grass_idle.png" id="1_gidle"]
+[ext_resource type="Texture2D" uid="uid://bagfa3sxvdvvu" path="res://assets/sprites/level1/sl_grass_jump.png" id="2_gjump"]
+[ext_resource type="Texture2D" uid="uid://t4bihywj1e1d" path="res://assets/sprites/level1/sl_grass_fall.png" id="3_gfall"]
+[ext_resource type="Texture2D" uid="uid://b40gxhlvoi1vg" path="res://assets/sprites/level1/sl_death.png" id="4_death"]
 
 [sub_resource type="AtlasTexture" id="death_0"]
 atlas = ExtResource("4_death")
