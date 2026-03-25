@@ -1,6 +1,6 @@
 extends Node2D
 
-# ── Node refs (all exist in the .tscn, nothing built at runtime) ──────────────
+# ── Node refs ──────────────────────────────────────────────────────────────────
 @onready var label_bones  : Label        = $HUD/Stats/BoneLabel
 @onready var label_dist   : Label        = $HUD/Stats/DistLabel
 @onready var label_score  : Label        = $HUD/Stats/ScoreLabel
@@ -10,17 +10,20 @@ extends Node2D
 @onready var lulu         : CharacterBody2D = $Lulu
 @onready var music        : AudioStreamPlayer = $Music
 
-# ── Parallax layers ───────────────────────────────────────────────────────────
-@onready var clouds_layer    : Parallax2D = $CloudsLayer
-@onready var mountains_layer : Parallax2D = $MountainsLayer
-@onready var trees_layer     : Parallax2D = $TreesLayer
+# ── Parallax layers inside Road subscene ──────────────────────────────────────
+@onready var bg_layer       : Parallax2D = $Road/Background
+@onready var sun_layer      : Parallax2D = $Road/Sun
+@onready var buildings_layer: Parallax2D = $Road/Buildings
+@onready var palms_layer    : Parallax2D = $Road/Palms
+@onready var highway_layer  : Parallax2D = $Road/Highway
+@onready var palmtree_layer : Parallax2D = $Road/PalmTree
 
 # ── Speed progression ─────────────────────────────────────────────────────────
-const BASE_SPEED      := 220.0
-const SPEED_INCREMENT := 15.0
-const MAX_SPEED       := 520.0
+const BASE_SPEED      := 250.0
+const SPEED_INCREMENT := 18.0
+const MAX_SPEED       := 560.0
 
-# ── Public state (read by Goal.gd / Bone.gd) ─────────────────────────────────
+# ── Public state ──────────────────────────────────────────────────────────────
 var bones_collected      := 0
 var score                := 0
 var distance             := 0.0
@@ -30,55 +33,43 @@ var _speed_level         := 0
 var _running             := false
 var _game_over_triggered := false
 
-# ── Ready ─────────────────────────────────────────────────────────────────────
 func _ready() -> void:
 	add_to_group("level")
-
 	_start_x       = lulu.position.x
 	lulu.run_speed = BASE_SPEED
 	lulu.mischief_gained.connect(_on_mischief_changed)
 	lulu.died.connect(_on_lulu_died)
-
 	_update_hud()
 	_running = true
 	music.play()
 
-# ── Per-frame ─────────────────────────────────────────────────────────────────
 func _process(delta: float) -> void:
 	if not _running or not is_instance_valid(lulu):
 		return
-
-	# Smooth camera: lead ahead of Lulu
 	camera.position.x = lerp(camera.position.x, lulu.position.x + 120.0, 8.0 * delta)
 	camera.position.y = lerp(
 		camera.position.y,
 		clamp(lulu.position.y - 60.0, float(camera.limit_top + 100), float(camera.limit_bottom - 100)),
 		5.0 * delta
 	)
-
-	# In Godot 4, Parallax2D.scroll_offset drives where the layer is anchored.
-	# The node's own scroll_scale then makes it move at a fraction of camera speed.
-	# We set scroll_offset = camera.position so each layer tracks the viewport
-	# but lags behind according to its scroll_scale.
+	# Drive parallax layers so background correctly follows the camera
 	var cx := camera.position.x
 	var cy := camera.position.y
-	clouds_layer.scroll_offset    = Vector2(cx, cy)
-	mountains_layer.scroll_offset = Vector2(cx, cy)
-	trees_layer.scroll_offset     = Vector2(cx, cy)
+	bg_layer.scroll_offset        = Vector2(cx, cy)
+	sun_layer.scroll_offset       = Vector2(cx, cy)
+	buildings_layer.scroll_offset = Vector2(cx, cy)
+	palms_layer.scroll_offset     = Vector2(cx, cy)
+	highway_layer.scroll_offset   = Vector2(cx, cy)
+	palmtree_layer.scroll_offset  = Vector2(cx, cy)
 
-	# Distance and score
 	distance = max((lulu.position.x - _start_x) / 48.0, distance)
 	score    = int(distance) * 10 + bones_collected * 50
-
-	# Speed up every 500 m
-	var spd_lvl := int(distance / 500.0)
+	var spd_lvl := int(distance / 400.0)
 	if spd_lvl > _speed_level:
 		_speed_level   = spd_lvl
 		lulu.run_speed = min(BASE_SPEED + _speed_level * SPEED_INCREMENT, MAX_SPEED)
-
 	_update_hud()
 
-# ── HUD ───────────────────────────────────────────────────────────────────────
 func _update_hud() -> void:
 	if label_bones:  label_bones.text = "🦴  %d" % bones_collected
 	if label_dist:   label_dist.text  = "📍  %dm" % int(distance)
@@ -100,13 +91,11 @@ func _on_mischief_changed(value: int) -> void:
 			mischief_bar.value   = value
 			frenzy_label.visible = false
 
-# ── Callbacks (called by Bone.gd) ─────────────────────────────────────────────
 func on_bone_collected() -> void:
 	bones_collected += 1
 	if is_instance_valid(lulu):
 		lulu.on_bone_collected()
 
-# ── Death / Game Over ─────────────────────────────────────────────────────────
 func _on_lulu_died() -> void:
 	if _game_over_triggered:
 		return

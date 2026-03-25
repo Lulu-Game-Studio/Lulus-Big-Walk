@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://bp01q68au286w"]
+
+[ext_resource type="Texture2D" uid="uid://f3yblh2u01je" path="res://assets/sprites/level2/back.png" id="1_7wbk1"]
+[ext_resource type="Texture2D" uid="uid://oqnxs51y04pu" path="res://assets/sprites/level2/buildings.png" id="2_dtnt8"]
+[ext_resource type="Texture2D" uid="uid://cw1kto706ouyr" path="res://assets/sprites/level2/sun.png" id="2_uarap"]
+[ext_resource type="Texture2D" uid="uid://cvllj6otijvtk" path="res://assets/sprites/level2/highway.png" id="3_8p8n4"]
+[ext_resource type="Texture2D" uid="uid://cif5c1xyxrty3" path="res://assets/sprites/level2/palm-tree.png" id="4_8p8n4"]
+[ext_resource type="Texture2D" uid="uid://7f456d5q54ql" path="res://assets/sprites/level2/palms.png" id="5_b7b30"]
+
+[node name="Road" type="Node2D" unique_id=757068522]
+
+[node name="Background" type="Parallax2D" parent="." unique_id=988734817]
+texture_filter = 1
+scroll_scale = Vector2(0.05, 1)
+repeat_size = Vector2(1280, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background" unique_id=1220325084]
+texture_repeat = 3
+scale = Vector2(5.0, 3.0)
+texture = ExtResource("1_7wbk1")
+centered = false
+
+[node name="Sun" type="Parallax2D" parent="." unique_id=363083000]
+scroll_scale = Vector2(0.02, 1)
+autoscroll = Vector2(2, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Sun" unique_id=915928320]
+position = Vector2(200, 20)
+scale = Vector2(3.0, 3.0)
+texture = ExtResource("2_uarap")
+centered = false
+
+[node name="Buildings" type="Parallax2D" parent="." unique_id=1470462618]
+scroll_scale = Vector2(0.15, 1)
+repeat_size = Vector2(1280, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Buildings" unique_id=1386828422]
+texture_repeat = 3
+scale = Vector2(5.0, 3.0)
+texture = ExtResource("2_dtnt8")
+centered = false
+
+[node name="Palms" type="Parallax2D" parent="." unique_id=1476882911]
+scroll_scale = Vector2(0.35, 1)
+repeat_size = Vector2(1280, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Palms" unique_id=1586381158]
+texture_repeat = 3
+scale = Vector2(5.0, 3.0)
+texture = ExtResource("5_b7b30")
+centered = false
+
+[node name="Highway" type="Parallax2D" parent="." unique_id=1939591931]
+scroll_scale = Vector2(1.0, 1)
+repeat_size = Vector2(1792, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Highway" unique_id=263790001]
+texture_repeat = 3
+scale = Vector2(3.0, 2.5)
+texture = ExtResource("3_8p8n4")
+centered = false
+
+[node name="PalmTree" type="Parallax2D" parent="." unique_id=457160101]
+scroll_scale = Vector2(0.6, 1)
+repeat_size = Vector2(1280, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="PalmTree" unique_id=1030622133]
+texture_repeat = 3
+scale = Vector2(3.0, 3.0)
+texture = ExtResource("4_8p8n4")
+centered = false

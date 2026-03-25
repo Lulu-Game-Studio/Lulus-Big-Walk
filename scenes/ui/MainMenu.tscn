@@ -1,46 +1,16 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dck66xti5bns0"]
 
-[ext_resource type="Script" path="res://scenes/ui/MainMenu.gd" id="1_mm"]
-[ext_resource type="Texture2D" path="res://assets/sprites/sl_title-screen.png" id="2_title"]
+[ext_resource type="Script" uid="uid://cgtm34u3anl8c" path="res://scenes/ui/MainMenu.gd" id="1_mm"]
 
-[node name="MainMenu" type="Node"]
+[node name="MainMenu" type="Node" unique_id=1537664140]
 script = ExtResource("1_mm")
 
-[node name="BG" type="ColorRect" parent="."]
+[node name="BG" type="ColorRect" parent="." unique_id=1095785360]
 offset_right = 1280.0
 offset_bottom = 720.0
 color = Color(0.15, 0.27, 0.15, 1)
 
-[node name="TitleImage" type="TextureRect" parent="."]
-offset_left = 543.0
-offset_top = 160.0
-offset_right = 737.0
-offset_bottom = 225.0
-scale = Vector2(3.0, 3.0)
-texture = ExtResource("2_title")
-expand_mode = 1
-
-[node name="HighscoreLabel" type="Label" parent="."]
-offset_left = 490.0
-offset_top = 290.0
-offset_right = 790.0
-offset_bottom = 320.0
-horizontal_alignment = 1
-theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(1.0, 0.85, 0.2, 1)
-text = "🏆  Récord: 0"
-
-[node name="BestDistLabel" type="Label" parent="."]
-offset_left = 490.0
-offset_top = 316.0
-offset_right = 790.0
-offset_bottom = 344.0
-horizontal_alignment = 1
-theme_override_font_sizes/font_size = 16
-theme_override_colors/font_color = Color(0.8, 0.9, 1.0, 1)
-text = "📍  Mejor distancia: 0 m"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1039975807]
 offset_left = 490.0
 offset_top = 360.0
 offset_right = 790.0
@@ -48,22 +18,23 @@ offset_bottom = 500.0
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="PlayButton" type="Button" parent="VBoxContainer"]
-text = "JUGAR"
-theme_override_font_sizes/font_size = 28
+[node name="PlayButton" type="Button" parent="VBoxContainer" unique_id=1178466819]
 custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "JUGAR"
 
-[node name="QuitButton" type="Button" parent="VBoxContainer"]
-text = "SALIR"
-theme_override_font_sizes/font_size = 24
+[node name="QuitButton" type="Button" parent="VBoxContainer" unique_id=1892180973]
 custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "SALIR"
 
-[node name="ControlsLabel" type="Label" parent="."]
-offset_left = 0.0
+[node name="ControlsLabel" type="Label" parent="." unique_id=395442096]
 offset_top = 660.0
 offset_right = 1280.0
 offset_bottom = 690.0
-horizontal_alignment = 1
-theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.7, 0.8, 0.7, 0.8)
+theme_override_font_sizes/font_size = 14
 text = "ESPACIO: saltar   Z: ladrar   P: marcar territorio   S: agacharse"
+horizontal_alignment = 1
