@@ -10,11 +10,6 @@ extends Node2D
 @onready var lulu         : CharacterBody2D = $Lulu
 @onready var music        : AudioStreamPlayer = $Music
 
-# ── Parallax layers ───────────────────────────────────────────────────────────
-@onready var clouds_layer    : Parallax2D = $CloudsLayer
-@onready var mountains_layer : Parallax2D = $MountainsLayer
-@onready var trees_layer     : Parallax2D = $TreesLayer
-
 # ── Speed progression ─────────────────────────────────────────────────────────
 const BASE_SPEED      := 220.0
 const SPEED_INCREMENT := 15.0
@@ -55,16 +50,6 @@ func _process(delta: float) -> void:
 		clamp(lulu.position.y - 60.0, float(camera.limit_top + 100), float(camera.limit_bottom - 100)),
 		5.0 * delta
 	)
-
-	# In Godot 4, Parallax2D.scroll_offset drives where the layer is anchored.
-	# The node's own scroll_scale then makes it move at a fraction of camera speed.
-	# We set scroll_offset = camera.position so each layer tracks the viewport
-	# but lags behind according to its scroll_scale.
-	var cx := camera.position.x
-	var cy := camera.position.y
-	clouds_layer.scroll_offset    = Vector2(cx, cy)
-	mountains_layer.scroll_offset = Vector2(cx, cy)
-	trees_layer.scroll_offset     = Vector2(cx, cy)
 
 	# Distance and score
 	distance = max((lulu.position.x - _start_x) / 48.0, distance)
