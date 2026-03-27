@@ -2,17 +2,16 @@ extends Node
 
 @onready var play_button     : Button = $VBoxContainer/PlayButton
 @onready var quit_button     : Button = $VBoxContainer/QuitButton
-@onready var highscore_label : Label  = $HighscoreLabel
-@onready var best_dist_label : Label  = $BestDistLabel
+@onready var music : AudioStreamPlayer = $AudioStreamPlayer
+
+var mainMenuMusic = preload("res://assets/audio/Splitting the Fields - Jon Björk.mp3")
 
 func _ready() -> void:
 	play_button.pressed.connect(_on_play)
 	quit_button.pressed.connect(_on_quit)
 	play_button.grab_focus()
-
-	var gm := GameManager
-	highscore_label.text  = "🏆  Récord: %d" % gm.highscore
-	best_dist_label.text  = "📍  Mejor distancia: %d m" % int(gm.best_distance)
+	music.stream = mainMenuMusic
+	music.play()
 
 func _on_play() -> void:
 	GameManager.go_to_level(1)
