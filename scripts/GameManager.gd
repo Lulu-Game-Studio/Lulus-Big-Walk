@@ -15,7 +15,7 @@ const SAVE_PATH := "user://lulu_save.cfg"
 
 const LEVELS = {
 	1: "res://scenes/levels/Level1_Park.tscn",
-	2: "res://scenes/levels/Level2_City.tscn",
+	2: "res://scenes/levels/Level2_Cave.tscn",
 	3: "res://scenes/levels/Level3_Forest.tscn",
 }
 
@@ -66,10 +66,5 @@ func complete_level() -> void:
 	if current_level >= levels_unlocked:
 		levels_unlocked = current_level + 1
 		_save()
-	var next := current_level + 1
-	if LEVELS.has(next):
-		# Show win screen; it will auto-advance to next level
-		go_to_you_win()
-	else:
-		# Completed all levels
-		go_to_you_win()
+	# Always show the win screen; it decides whether to go next or stay on final
+	go_to_you_win()
