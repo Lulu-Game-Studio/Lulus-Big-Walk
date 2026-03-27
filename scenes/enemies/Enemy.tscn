@@ -1,7 +1,7 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://b1xi7lt8ejvgy"]
 
-[ext_resource type="Script" path="res://scenes/enemies/Enemy.gd" id="1_en"]
-[ext_resource type="SpriteFrames" path="res://assets/spriteframes/enemy_frames.tres" id="2_sf"]
+[ext_resource type="Script" uid="uid://cy84t5vagx664" path="res://scenes/enemies/Enemy.gd" id="1_en"]
+[ext_resource type="SpriteFrames" uid="uid://ncd6s7n6fwun" path="res://assets/spriteframes/enemy_frames.tres" id="2_sf"]
 
 [sub_resource type="RectangleShape2D" id="EnemyBody"]
 size = Vector2(28, 28)
@@ -9,20 +9,21 @@ size = Vector2(28, 28)
 [sub_resource type="RectangleShape2D" id="HitboxShape"]
 size = Vector2(34, 34)
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" unique_id=937597631]
 script = ExtResource("1_en")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1844153403]
+position = Vector2(0, 8)
 sprite_frames = ExtResource("2_sf")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=999162348]
 position = Vector2(0, 4)
 shape = SubResource("EnemyBody")
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=801237064]
 
-[node name="HitboxShape" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(0, 4)
+[node name="HitboxShape" type="CollisionShape2D" parent="Hitbox" unique_id=2131959228]
+position = Vector2(0, 6)
 shape = SubResource("HitboxShape")
