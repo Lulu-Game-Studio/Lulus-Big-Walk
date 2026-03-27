@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://dpeo6mygequeo" path="res://scenes/levels/KillZone.gd" id="5_g7kpi"]
 [ext_resource type="Script" uid="uid://rr1mbwqk1lin" path="res://scenes/levels/Bone.gd" id="6_dxril"]
 [ext_resource type="Texture2D" uid="uid://dtof0y1upkxge" path="res://assets/sprites/femur.png" id="7_0bso8"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/Enemy.tscn" id="8_vii1a"]
+[ext_resource type="PackedScene" uid="uid://b1xi7lt8ejvgy" path="res://scenes/enemies/Enemy.tscn" id="8_vii1a"]
 [ext_resource type="Script" uid="uid://dwulutwj3arbe" path="res://scenes/levels/Goal.gd" id="9_rp6p7"]
 [ext_resource type="PackedScene" uid="uid://c17b6wt64nkwq" path="res://scenes/player/Lulu.tscn" id="10_gh7ao"]
 [ext_resource type="AudioStream" uid="uid://c65gts1fbljn8" path="res://assets/audio/the_valley.ogg" id="11_oq7tg"]
@@ -530,7 +530,7 @@ text = "⭐ 0"
 layout_mode = 2
 theme_override_colors/font_color = Color(0.5, 0.8, 1, 1)
 theme_override_font_sizes/font_size = 20
-text = "🏙 CITY"
+text = "🏙 CAVE"
 
 [node name="MischiefBar" type="ProgressBar" parent="HUD" unique_id=1778778690]
 offset_left = 3.0

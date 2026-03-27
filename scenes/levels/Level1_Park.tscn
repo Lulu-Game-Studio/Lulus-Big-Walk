@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://6eb8y736jij1" path="res://assets/sprites/level1/sl_bg-mountains-wide.png" id="bg_mountains"]
 [ext_resource type="Texture2D" uid="uid://btukq5s6844vt" path="res://assets/sprites/level1/sl_bg-trees-wide.png" id="bg_trees"]
 [ext_resource type="Script" uid="uid://rr1mbwqk1lin" path="res://scenes/levels/Bone.gd" id="bone_gd"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/Enemy.tscn" id="enemy_scn"]
+[ext_resource type="PackedScene" uid="uid://b1xi7lt8ejvgy" path="res://scenes/enemies/Enemy.tscn" id="enemy_scn"]
 [ext_resource type="Texture2D" uid="uid://dtof0y1upkxge" path="res://assets/sprites/femur.png" id="femur_tex"]
 [ext_resource type="Script" uid="uid://dwulutwj3arbe" path="res://scenes/levels/Goal.gd" id="goal_gd"]
 [ext_resource type="Script" uid="uid://dpeo6mygequeo" path="res://scenes/levels/KillZone.gd" id="kill_gd"]

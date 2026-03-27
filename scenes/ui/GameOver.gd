@@ -1,5 +1,6 @@
 extends Node
 
+# UI node references
 @onready var retry_button    : Button = $VBoxContainer/RetryButton
 @onready var menu_button     : Button = $VBoxContainer/MenuButton
 @onready var score_label     : Label  = $StatsContainer/ScoreLabel
@@ -8,8 +9,10 @@ extends Node
 @onready var highscore_label : Label  = $StatsContainer/HighscoreLabel
 @onready var music : AudioStreamPlayer = $AudioStreamPlayer
 
+# Preload game over music
 var musicGameOver = preload("res://assets/audio/MusicGameOver.mp3")
 
+# Connect button signals to theis respective functions
 func _ready() -> void:
 	retry_button.pressed.connect(_on_retry)
 	menu_button.pressed.connect(_on_menu)

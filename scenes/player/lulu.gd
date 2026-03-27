@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-# ── Constants ─────────────────────────────────────────────────────────────────
+# Constants
 const BASE_SPEED       := 220.0
 const JUMP_FORCE       := -500.0
 const GRAVITY          := 1200.0
@@ -8,19 +8,17 @@ const JUMP_BUFFER_TIME := 0.14
 const STOMP_BOUNCE     := -320.0
 const DOUBLE_JUMP_MULT := 0.80
 
-# All Lulu sprites are 256×256 — no scale correction needed between animations
-# Set a display scale so she fits the 16px tile world (SCALE=3 → 48px tiles)
-# 256px sprite displayed at scale 0.28 ≈ 71px tall ≈ reasonable for a dog
+# Display scaling
 const DISPLAY_SCALE := Vector2(0.28, 0.28)
 
-# Mischief
+# Mischief system
 const MISCHIEF_MAX    := 10
 const FRENZY_DURATION := 8.0
 
-# ── Level-controlled state ────────────────────────────────────────────────────
+# Level-controlled state
 var run_speed : float = BASE_SPEED
 
-# ── Nodes ─────────────────────────────────────────────────────────────────────
+#  Node references
 @onready var anim          : AnimatedSprite2D    = $AnimatedSprite2D
 @onready var coyote_timer  : Timer               = $CoyoteTimer
 @onready var bark_cooldown : Timer               = $BarkCooldown
@@ -29,7 +27,7 @@ var run_speed : float = BASE_SPEED
 @onready var snd_hurt      : AudioStreamPlayer2D = $SndHurt
 @onready var snd_item      : AudioStreamPlayer2D = $SndItem
 
-# ── State ─────────────────────────────────────────────────────────────────────
+# State
 var coyote_available := false
 var jump_buffer      := 0.0
 var was_on_floor     := false
@@ -53,7 +51,7 @@ func _ready() -> void:
 	anim.animation_finished.connect(_on_anim_finished)
 	anim.play("idle")
 
-# ── Process ───────────────────────────────────────────────────────────────────
+# Process
 func _process(delta: float) -> void:
 	jump_buffer  = max(jump_buffer - delta, 0.0)
 	was_on_floor = is_on_floor()
@@ -75,7 +73,7 @@ func _physics_process(delta: float) -> void:
 	_check_stomp()
 	_update_animation()
 
-# ── Movement ──────────────────────────────────────────────────────────────────
+# Movement
 func _apply_gravity(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += GRAVITY * delta
@@ -143,7 +141,7 @@ func _handle_actions() -> void:
 		_play("poop")
 		_add_mischief(2)
 
-# ── Mischief ─────────────────────────────────────────────────────────────────
+# Mischief
 func _add_mischief(amount: int) -> void:
 	if frenzy_active:
 		return
@@ -176,11 +174,11 @@ func _bark_stun_enemies() -> void:
 		if enemy.has_method("stun") and enemy.position.distance_to(position) < 180.0:
 			enemy.stun()
 
-# ── Collectible callback ──────────────────────────────────────────────────────
+# Collectible callback
 func on_bone_collected() -> void:
 	snd_item.play()
 
-# ── Death ─────────────────────────────────────────────────────────────────────
+# Death
 func die() -> void:
 	if is_dead or frenzy_active:
 		return
@@ -191,7 +189,7 @@ func die() -> void:
 	_play("hurt")
 	died.emit()
 
-# ── Stomp ─────────────────────────────────────────────────────────────────────
+# Stomp
 func _check_stomp() -> void:
 	if velocity.y <= 0:
 		return
@@ -202,7 +200,7 @@ func _check_stomp() -> void:
 			collider.die()
 			velocity.y = STOMP_BOUNCE
 
-# ── Animation ─────────────────────────────────────────────────────────────────
+# Animation
 func _update_animation() -> void:
 	if is_barking or is_pooping or is_dead:
 		return
@@ -231,7 +229,7 @@ func _on_anim_finished() -> void:
 func _on_coyote_timer_timeout() -> void:
 	coyote_available = false
 
-# ── Poop spawning ─────────────────────────────────────────────────────────────
+# Poop spawning
 func _spawn_poop() -> void:
 	var poop_node := _make_poop_node()
 	# Place poop at Lulu's feet, slightly behind her
