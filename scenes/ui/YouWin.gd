@@ -1,42 +1,47 @@
 extends Node
 
-const AUTO_ADVANCE_TIME := 5.0   # seconds before auto-advancing
+const AUTO_ADVANCE_TIME := 4.0
 
-@onready var title_label   : Label       = $Panel/VBox/TitleLabel
-@onready var sub_label     : Label       = $Panel/VBox/SubLabel
-@onready var countdown_lbl : Label       = $Panel/VBox/CountdownLabel
-@onready var next_btn      : Button      = $Panel/VBox/NextButton
-@onready var menu_btn      : Button      = $Panel/VBox/MenuButton
-@onready var stars_anim    : AnimationPlayer = $StarsAnim
+@onready var title_label   : Label  = $Panel/VBox/TitleLabel
+@onready var sub_label     : Label  = $Panel/VBox/SubLabel
+@onready var countdown_lbl : Label  = $Panel/VBox/CountdownLabel
+@onready var next_btn      : Button = $Panel/VBox/NextButton
+@onready var menu_btn      : Button = $Panel/VBox/MenuButton
+@onready var music : AudioStreamPlayer = $AudioStreamPlayer
 
+var WinMusic = preload("res://assets/audio/WinScene.mp3")
 var _timer   : float = AUTO_ADVANCE_TIME
 var _ticking : bool  = true
 
 func _ready() -> void:
 	var next_level := GameManager.current_level + 1
 	var has_next   := GameManager.LEVELS.has(next_level)
+	
+	music.stream = WinMusic
+	music.play()
 
 	if has_next:
-		title_label.text = "YOU WIN! 🐾"
-		sub_label.text   = "Level %d complete!" % GameManager.current_level
-		next_btn.text    = "Next Level ▶"
-		next_btn.visible = true
+		title_label.text      = "GOOD JOB!"
+		sub_label.text        = "Level %d completed!" % GameManager.current_level
+		next_btn.text         = "Next level ▶"
+		next_btn.visible      = true
 		countdown_lbl.visible = true
+		_ticking              = true
 	else:
-		title_label.text = "YOU WIN! 🏆"
-		sub_label.text   = "All levels complete!\nLulu is the best dog!"
-		next_btn.text    = "Play Again"
-		next_btn.visible = true
+		title_label.text      = "FANTASTIC!"
+		sub_label.text        = "All levels completed!\nCongratulations!"
+		next_btn.text         = "Back to menu"
+		next_btn.visible      = false
 		countdown_lbl.visible = false
-		_ticking = false
+		_ticking              = false
 
 	next_btn.pressed.connect(_on_next)
 	menu_btn.pressed.connect(_on_menu)
 
-	# Animate panel in
+	# Fade in
 	$Panel.modulate.a = 0.0
 	var tw := create_tween()
-	tw.tween_property(self, "modulate:a", 1.0, 0.6)
+	tw.tween_property($Panel, "modulate:a", 1.0, 0.5)
 
 func _process(delta: float) -> void:
 	if not _ticking:
@@ -46,7 +51,7 @@ func _process(delta: float) -> void:
 		_ticking = false
 		_on_next()
 	else:
-		countdown_lbl.text = "Next level in %d…" % ceili(_timer)
+		countdown_lbl.text = "Continuing in %d…" % ceili(_timer)
 
 func _on_next() -> void:
 	_ticking = false
@@ -54,7 +59,7 @@ func _on_next() -> void:
 	if GameManager.LEVELS.has(next_level):
 		GameManager.go_to_level(next_level)
 	else:
-		GameManager.go_to_level(1)
+		GameManager.go_to_menu()
 
 func _on_menu() -> void:
 	_ticking = false
