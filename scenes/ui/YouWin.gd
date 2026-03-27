@@ -1,7 +1,9 @@
 extends Node
 
+# Time before automatically advancing to the next screen
 const AUTO_ADVANCE_TIME := 4.0
 
+# UI Node References
 @onready var title_label   : Label  = $Panel/VBox/TitleLabel
 @onready var sub_label     : Label  = $Panel/VBox/SubLabel
 @onready var countdown_lbl : Label  = $Panel/VBox/CountdownLabel
@@ -9,6 +11,7 @@ const AUTO_ADVANCE_TIME := 4.0
 @onready var menu_btn      : Button = $Panel/VBox/MenuButton
 @onready var music : AudioStreamPlayer = $AudioStreamPlayer
 
+# Preloaded win scene music
 var WinMusic = preload("res://assets/audio/WinScene.mp3")
 var _timer   : float = AUTO_ADVANCE_TIME
 var _ticking : bool  = true
@@ -17,9 +20,11 @@ func _ready() -> void:
 	var next_level := GameManager.current_level + 1
 	var has_next   := GameManager.LEVELS.has(next_level)
 	
+	# Play win music
 	music.stream = WinMusic
 	music.play()
 
+# Player completed a level and can continue
 	if has_next:
 		title_label.text      = "GOOD JOB!"
 		sub_label.text        = "Level %d completed!" % GameManager.current_level
@@ -27,6 +32,7 @@ func _ready() -> void:
 		next_btn.visible      = true
 		countdown_lbl.visible = true
 		_ticking              = true
+	# Player finished all levels
 	else:
 		title_label.text      = "FANTASTIC!"
 		sub_label.text        = "All levels completed!\nCongratulations!"
@@ -38,11 +44,12 @@ func _ready() -> void:
 	next_btn.pressed.connect(_on_next)
 	menu_btn.pressed.connect(_on_menu)
 
-	# Fade in
+	# Fade in animation for the panel
 	$Panel.modulate.a = 0.0
 	var tw := create_tween()
 	tw.tween_property($Panel, "modulate:a", 1.0, 0.5)
 
+# Handle automatic transition countdown
 func _process(delta: float) -> void:
 	if not _ticking:
 		return
@@ -53,6 +60,7 @@ func _process(delta: float) -> void:
 	else:
 		countdown_lbl.text = "Continuing in %d…" % ceili(_timer)
 
+# Proceed to next level or fallback to menu
 func _on_next() -> void:
 	_ticking = false
 	var next_level := GameManager.current_level + 1
@@ -61,6 +69,7 @@ func _on_next() -> void:
 	else:
 		GameManager.go_to_menu()
 
+# Return to main menu
 func _on_menu() -> void:
 	_ticking = false
 	GameManager.go_to_menu()
