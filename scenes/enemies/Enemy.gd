@@ -12,6 +12,7 @@ const STUN_DURATION := 1.5
 var _dead       : bool  = false
 var _stunned    : bool  = false
 var _stun_timer : float = 0.0
+var _stun_tween : Tween = null
 var _jump_timer : float = 0.8
 
 func _ready() -> void:
@@ -68,13 +69,19 @@ func _do_jump() -> void:
 func stun() -> void:
 	if _dead:
 		return
+	if _stunned:   # second bark → dead
+		if _stun_tween:
+			_stun_tween.kill()  # ← it kills the tween before dead
+		die()
+		return
 	_stunned    = true
 	_stun_timer = STUN_DURATION
 	velocity    = Vector2.ZERO
-	# Flash white to indicate stun
-	var tw := create_tween().set_loops(3)
-	tw.tween_property(anim, "modulate", Color(2.0, 2.0, 2.0, 1.0), 0.1)
-	tw.tween_property(anim, "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.15)
+	if _stun_tween:
+		_stun_tween.kill()
+	_stun_tween = create_tween().set_loops(3)
+	_stun_tween.tween_property(anim, "modulate", Color(2.0, 2.0, 2.0, 1.0), 0.1)
+	_stun_tween.tween_property(anim, "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.15)
 
 func die() -> void:
 	if _dead:

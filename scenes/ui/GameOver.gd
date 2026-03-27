@@ -6,11 +6,16 @@ extends Node
 @onready var dist_label      : Label  = $StatsContainer/DistLabel
 @onready var bone_label      : Label  = $StatsContainer/BoneLabel
 @onready var highscore_label : Label  = $StatsContainer/HighscoreLabel
+@onready var music : AudioStreamPlayer = $AudioStreamPlayer
+
+var musicGameOver = preload("res://assets/audio/MusicGameOver.mp3")
 
 func _ready() -> void:
 	retry_button.pressed.connect(_on_retry)
 	menu_button.pressed.connect(_on_menu)
 	retry_button.grab_focus()
+	music.stream = musicGameOver
+	music.play()
 
 	# Pull last run stats from GameManager
 	var gm := GameManager

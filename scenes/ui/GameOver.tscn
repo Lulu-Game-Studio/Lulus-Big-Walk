@@ -68,3 +68,5 @@ text = "MENÚ PRINCIPAL"
 position = Vector2(653, 190)
 scale = Vector2(0.27213544, 0.26171875)
 texture = ExtResource("2_57v1k")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1235888626]

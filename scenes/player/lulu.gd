@@ -68,7 +68,7 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 	_apply_gravity(delta)
-	_handle_autorun()
+	_handle_movement()
 	_handle_jump()
 	_handle_actions()
 	move_and_slide()
@@ -85,14 +85,26 @@ func _apply_gravity(delta: float) -> void:
 		coyote_available = true
 		double_jumped    = false
 
-func _handle_autorun() -> void:
+func _handle_movement() -> void:
 	if is_barking or is_pooping:
 		# Slow to a stop while doing special action
 		velocity.x = move_toward(velocity.x, 0.0, 600.0 * get_physics_process_delta_time())
 		return
+
 	var spd := run_speed * (2.0 if frenzy_active else 1.0)
-	velocity.x = spd
-	anim.flip_h = false
+	var dir := 0.0
+
+	if Input.is_action_pressed("move_right"):
+		dir += 1.0
+	if Input.is_action_pressed("move_left"):
+		dir -= 1.0
+
+	if dir != 0.0:
+		velocity.x = dir * spd
+		anim.flip_h = dir < 0.0
+	else:
+		# Stand still when no key pressed
+		velocity.x = move_toward(velocity.x, 0.0, 600.0 * get_physics_process_delta_time())
 
 func _handle_jump() -> void:
 	if is_barking or is_pooping or is_dead:
@@ -199,8 +211,10 @@ func _update_animation() -> void:
 	elif Input.is_action_pressed("ui_down"):
 		_play("sit")
 		velocity.x = move_toward(velocity.x, 0.0, 600.0 * get_physics_process_delta_time())
-	else:
+	elif abs(velocity.x) > 10.0:
 		_play("run")
+	else:
+		_play("idle")
 
 func _play(anim_name: String) -> void:
 	if anim.animation != anim_name:
@@ -212,6 +226,52 @@ func _on_anim_finished() -> void:
 			is_barking = false
 		&"poop":
 			is_pooping = false
+			_spawn_poop()
 
 func _on_coyote_timer_timeout() -> void:
 	coyote_available = false
+
+# ── Poop spawning ─────────────────────────────────────────────────────────────
+func _spawn_poop() -> void:
+	var poop_node := _make_poop_node()
+	# Place poop at Lulu's feet, slightly behind her
+	var offset_x := 24.0 if anim.flip_h else -24.0
+	poop_node.global_position = global_position + Vector2(offset_x, 20.0)
+	get_parent().add_child(poop_node)
+
+func _make_poop_node() -> Node2D:
+	var root := Node2D.new()
+	root.name = "PoopPile"
+	root.z_index = 1
+
+	# Emoji label for the poop
+	var lbl := Label.new()
+	lbl.text = "💩"
+	lbl.add_theme_font_size_override("font_size", 28)
+	lbl.position = Vector2(-14, -28)
+	root.add_child(lbl)
+
+	# Area2D so enemies can detect poop (optional)
+	var area := Area2D.new()
+	var shape := CollisionShape2D.new()
+	var circ  := CircleShape2D.new()
+	circ.radius = 14.0
+	shape.shape  = circ
+	shape.position = Vector2(0, -8)
+	area.add_child(shape)
+	area.add_to_group("poop_pile")
+	root.add_child(area)
+
+	# Auto-remove after 6 seconds with a fade
+	var timer := Timer.new()
+	timer.wait_time = 6.0
+	timer.one_shot  = true
+	timer.autostart = true
+	root.add_child(timer)
+	timer.timeout.connect(func():
+		var tw := root.create_tween()
+		tw.tween_property(root, "modulate:a", 0.0, 1.0)
+		tw.tween_callback(root.queue_free)
+	)
+
+	return root
