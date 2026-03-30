@@ -1,4 +1,4 @@
-extends "res://scenes/levels/levels.gd"
+extends Levels
 
 const BASE_SPEED := 220.0 # Base movement speed of Lulu
 const SPEED_INCREMENT := 15.0 # Speed added when player speeds up
