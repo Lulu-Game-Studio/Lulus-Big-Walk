@@ -1,4 +1,4 @@
-extends "res://scenes/levels/levels.gd"
+extends Levels
 
 const BASE_SPEED := 250.0
 const SPEED_INCREMENT := 18.0

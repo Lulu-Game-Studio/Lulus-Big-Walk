@@ -2,7 +2,7 @@ extends Node2D
 
 class_name Levels
 
-#  # Node references
+# Node references
 @onready var label_bones  : Label        = $HUD/Stats/BoneLabel
 @onready var label_dist   : Label        = $HUD/Stats/DistLabel
 @onready var label_score  : Label        = $HUD/Stats/ScoreLabel
