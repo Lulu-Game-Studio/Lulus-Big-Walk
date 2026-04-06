@@ -1,0 +1,113 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://ncd6s7n6fwun"]
+
+[ext_resource type="Texture2D" uid="uid://bqx216osy7xdb" path="res://assets/sprites/level1/sl_grass_idle.png" id="1_gidle"]
+[ext_resource type="Texture2D" uid="uid://bagfa3sxvdvvu" path="res://assets/sprites/level1/sl_grass_jump.png" id="2_gjump"]
+[ext_resource type="Texture2D" uid="uid://t4bihywj1e1d" path="res://assets/sprites/level1/sl_grass_fall.png" id="3_gfall"]
+[ext_resource type="Texture2D" uid="uid://b40gxhlvoi1vg" path="res://assets/sprites/level1/sl_death.png" id="4_death"]
+
+[sub_resource type="AtlasTexture" id="death_0"]
+atlas = ExtResource("4_death")
+region = Rect2(0, 0, 28, 26)
+
+[sub_resource type="AtlasTexture" id="death_1"]
+atlas = ExtResource("4_death")
+region = Rect2(28, 0, 28, 26)
+
+[sub_resource type="AtlasTexture" id="death_2"]
+atlas = ExtResource("4_death")
+region = Rect2(56, 0, 28, 26)
+
+[sub_resource type="AtlasTexture" id="death_3"]
+atlas = ExtResource("4_death")
+region = Rect2(84, 0, 28, 26)
+
+[sub_resource type="AtlasTexture" id="gfall_0"]
+atlas = ExtResource("3_gfall")
+region = Rect2(0, 0, 52, 45)
+
+[sub_resource type="AtlasTexture" id="gfall_1"]
+atlas = ExtResource("3_gfall")
+region = Rect2(52, 0, 52, 45)
+
+[sub_resource type="AtlasTexture" id="gidle_0"]
+atlas = ExtResource("1_gidle")
+region = Rect2(0, 0, 52, 45)
+
+[sub_resource type="AtlasTexture" id="gidle_1"]
+atlas = ExtResource("1_gidle")
+region = Rect2(52, 0, 52, 45)
+
+[sub_resource type="AtlasTexture" id="gidle_2"]
+atlas = ExtResource("1_gidle")
+region = Rect2(104, 0, 52, 45)
+
+[sub_resource type="AtlasTexture" id="gidle_3"]
+atlas = ExtResource("1_gidle")
+region = Rect2(156, 0, 52, 45)
+
+[sub_resource type="AtlasTexture" id="gjump_0"]
+atlas = ExtResource("2_gjump")
+region = Rect2(0, 0, 52, 45)
+
+[sub_resource type="AtlasTexture" id="gjump_1"]
+atlas = ExtResource("2_gjump")
+region = Rect2(52, 0, 52, 45)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("death_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("death_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("death_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("death_3")
+}],
+"loop": false,
+"name": &"death",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("gfall_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("gfall_1")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("gidle_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("gidle_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("gidle_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("gidle_3")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("gjump_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("gjump_1")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 8.0
+}]

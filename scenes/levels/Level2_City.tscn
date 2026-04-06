@@ -1,0 +1,481 @@
+[gd_scene format=3 uid="uid://c7aj5h6wi2jxd"]
+
+[ext_resource type="PackedScene" uid="uid://bp01q68au286w" path="res://scenes/levels/road.tscn" id="2_5wc3u"]
+[ext_resource type="Script" uid="uid://rr1mbwqk1lin" path="res://scenes/levels/Bone.gd" id="bone_gd"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/Enemy.tscn" id="enemy_scn"]
+[ext_resource type="Texture2D" uid="uid://dtof0y1upkxge" path="res://assets/sprites/femur.png" id="femur_tex"]
+[ext_resource type="Script" uid="uid://dwulutwj3arbe" path="res://scenes/levels/Goal.gd" id="goal_gd"]
+[ext_resource type="Script" uid="uid://dpeo6mygequeo" path="res://scenes/levels/KillZone.gd" id="kill_gd"]
+[ext_resource type="Script" path="res://scenes/levels/Level2.gd" id="level_gd"]
+[ext_resource type="PackedScene" uid="uid://c17b6wt64nkwq" path="res://scenes/player/Lulu.tscn" id="lulu_scn"]
+[ext_resource type="AudioStream" uid="uid://c65gts1fbljn8" path="res://assets/audio/the_valley.ogg" id="music_ogg"]
+
+[sub_resource type="RectangleShape2D" id="gnd_shape"]
+size = Vector2(4800, 192)
+
+[sub_resource type="RectangleShape2D" id="plat_a0"]
+size = Vector2(240, 48)
+
+[sub_resource type="RectangleShape2D" id="plat_a1"]
+size = Vector2(192, 48)
+
+[sub_resource type="RectangleShape2D" id="plat_a2"]
+size = Vector2(288, 48)
+
+[sub_resource type="RectangleShape2D" id="plat_a3"]
+size = Vector2(192, 48)
+
+[sub_resource type="RectangleShape2D" id="plat_a4"]
+size = Vector2(240, 48)
+
+[sub_resource type="RectangleShape2D" id="plat_a5"]
+size = Vector2(192, 48)
+
+[sub_resource type="RectangleShape2D" id="plat_a6"]
+size = Vector2(288, 48)
+
+[sub_resource type="RectangleShape2D" id="plat_a7"]
+size = Vector2(192, 48)
+
+[sub_resource type="RectangleShape2D" id="plat_a8"]
+size = Vector2(240, 48)
+
+[sub_resource type="RectangleShape2D" id="plat_a9"]
+size = Vector2(288, 48)
+
+[sub_resource type="RectangleShape2D" id="plat_a10"]
+size = Vector2(192, 48)
+
+[sub_resource type="RectangleShape2D" id="kill_shape"]
+size = Vector2(4800, 96)
+
+[sub_resource type="CircleShape2D" id="bone_shape"]
+radius = 12.0
+
+[sub_resource type="RectangleShape2D" id="goal_shape"]
+size = Vector2(144, 192)
+
+[node name="Level2City" type="Node2D" unique_id=157747239]
+script = ExtResource("level_gd")
+
+[node name="Road" parent="." unique_id=757068522 instance=ExtResource("2_5wc3u")]
+position = Vector2(4, 223)
+
+[node name="GroundBody" type="StaticBody2D" parent="." unique_id=1718812621]
+
+[node name="GroundShape" type="CollisionShape2D" parent="GroundBody" unique_id=1445757681]
+position = Vector2(2400, 716)
+shape = SubResource("gnd_shape")
+
+[node name="GroundVis" type="ColorRect" parent="." unique_id=1037996686]
+z_index = -1
+offset_top = 620.0
+offset_right = 4800.0
+offset_bottom = 760.0
+color = Color(0.22, 0.2, 0.16, 1)
+
+[node name="Platform0" type="StaticBody2D" parent="." unique_id=906702324]
+
+[node name="Shape" type="CollisionShape2D" parent="Platform0" unique_id=1734345591]
+position = Vector2(480, 480)
+shape = SubResource("plat_a0")
+
+[node name="Vis" type="ColorRect" parent="Platform0" unique_id=1397499133]
+offset_left = 360.0
+offset_top = 456.0
+offset_right = 600.0
+offset_bottom = 504.0
+color = Color(0.3, 0.28, 0.42, 1)
+
+[node name="Platform1" type="StaticBody2D" parent="." unique_id=1748165259]
+
+[node name="Shape" type="CollisionShape2D" parent="Platform1" unique_id=179834684]
+position = Vector2(816, 360)
+shape = SubResource("plat_a1")
+
+[node name="Vis" type="ColorRect" parent="Platform1" unique_id=1401819501]
+offset_left = 720.0
+offset_top = 336.0
+offset_right = 912.0
+offset_bottom = 384.0
+color = Color(0.3, 0.28, 0.42, 1)
+
+[node name="Platform2" type="StaticBody2D" parent="." unique_id=262131070]
+
+[node name="Shape" type="CollisionShape2D" parent="Platform2" unique_id=775299623]
+position = Vector2(1200, 480)
+shape = SubResource("plat_a2")
+
+[node name="Vis" type="ColorRect" parent="Platform2" unique_id=1099514004]
+offset_left = 1056.0
+offset_top = 456.0
+offset_right = 1344.0
+offset_bottom = 504.0
+color = Color(0.3, 0.28, 0.42, 1)
+
+[node name="Platform3" type="StaticBody2D" parent="." unique_id=1469793213]
+
+[node name="Shape" type="CollisionShape2D" parent="Platform3" unique_id=1542841423]
+position = Vector2(1584, 360)
+shape = SubResource("plat_a3")
+
+[node name="Vis" type="ColorRect" parent="Platform3" unique_id=1820926979]
+offset_left = 1488.0
+offset_top = 336.0
+offset_right = 1680.0
+offset_bottom = 384.0
+color = Color(0.3, 0.28, 0.42, 1)
+
+[node name="Platform4" type="StaticBody2D" parent="." unique_id=1224925095]
+
+[node name="Shape" type="CollisionShape2D" parent="Platform4" unique_id=694924121]
+position = Vector2(1968, 240)
+shape = SubResource("plat_a4")
+
+[node name="Vis" type="ColorRect" parent="Platform4" unique_id=1590802872]
+offset_left = 1848.0
+offset_top = 216.0
+offset_right = 2088.0
+offset_bottom = 264.0
+color = Color(0.3, 0.28, 0.42, 1)
+
+[node name="Platform5" type="StaticBody2D" parent="." unique_id=1611426641]
+
+[node name="Shape" type="CollisionShape2D" parent="Platform5" unique_id=955191062]
+position = Vector2(2352, 360)
+shape = SubResource("plat_a5")
+
+[node name="Vis" type="ColorRect" parent="Platform5" unique_id=1458768084]
+offset_left = 2256.0
+offset_top = 336.0
+offset_right = 2448.0
+offset_bottom = 384.0
+color = Color(0.3, 0.28, 0.42, 1)
+
+[node name="Platform6" type="StaticBody2D" parent="." unique_id=1155716104]
+
+[node name="Shape" type="CollisionShape2D" parent="Platform6" unique_id=2048345396]
+position = Vector2(2784, 240)
+shape = SubResource("plat_a6")
+
+[node name="Vis" type="ColorRect" parent="Platform6" unique_id=2076024018]
+offset_left = 2640.0
+offset_top = 216.0
+offset_right = 2928.0
+offset_bottom = 264.0
+color = Color(0.3, 0.28, 0.42, 1)
+
+[node name="Platform7" type="StaticBody2D" parent="." unique_id=1637038434]
+
+[node name="Shape" type="CollisionShape2D" parent="Platform7" unique_id=1773031512]
+position = Vector2(3168, 360)
+shape = SubResource("plat_a7")
+
+[node name="Vis" type="ColorRect" parent="Platform7" unique_id=985197785]
+offset_left = 3072.0
+offset_top = 336.0
+offset_right = 3264.0
+offset_bottom = 384.0
+color = Color(0.3, 0.28, 0.42, 1)
+
+[node name="Platform8" type="StaticBody2D" parent="." unique_id=784330747]
+
+[node name="Shape" type="CollisionShape2D" parent="Platform8" unique_id=348339494]
+position = Vector2(3552, 480)
+shape = SubResource("plat_a8")
+
+[node name="Vis" type="ColorRect" parent="Platform8" unique_id=2087992848]
+offset_left = 3432.0
+offset_top = 456.0
+offset_right = 3672.0
+offset_bottom = 504.0
+color = Color(0.3, 0.28, 0.42, 1)
+
+[node name="Platform9" type="StaticBody2D" parent="." unique_id=1941022536]
+
+[node name="Shape" type="CollisionShape2D" parent="Platform9" unique_id=1369011893]
+position = Vector2(3936, 360)
+shape = SubResource("plat_a9")
+
+[node name="Vis" type="ColorRect" parent="Platform9" unique_id=952340685]
+offset_left = 3792.0
+offset_top = 336.0
+offset_right = 4080.0
+offset_bottom = 384.0
+color = Color(0.3, 0.28, 0.42, 1)
+
+[node name="Platform10" type="StaticBody2D" parent="." unique_id=1570568001]
+
+[node name="Shape" type="CollisionShape2D" parent="Platform10" unique_id=953110042]
+position = Vector2(4320, 480)
+shape = SubResource("plat_a10")
+
+[node name="Vis" type="ColorRect" parent="Platform10" unique_id=1785139266]
+offset_left = 4224.0
+offset_top = 456.0
+offset_right = 4416.0
+offset_bottom = 504.0
+color = Color(0.3, 0.28, 0.42, 1)
+
+[node name="KillZone" type="Area2D" parent="." unique_id=23519882]
+script = ExtResource("kill_gd")
+
+[node name="KillShape" type="CollisionShape2D" parent="KillZone" unique_id=1146953415]
+position = Vector2(2400, 810)
+shape = SubResource("kill_shape")
+
+[node name="Bones" type="Node2D" parent="." unique_id=984626208]
+
+[node name="Bone0" type="Area2D" parent="Bones" unique_id=1513429447]
+position = Vector2(240, 576)
+script = ExtResource("bone_gd")
+
+[node name="Shape" type="CollisionShape2D" parent="Bones/Bone0" unique_id=1625840639]
+shape = SubResource("bone_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bones/Bone0" unique_id=1522126983]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("femur_tex")
+
+[node name="Bone1" type="Area2D" parent="Bones" unique_id=2085607228]
+position = Vector2(480, 444)
+script = ExtResource("bone_gd")
+
+[node name="Shape" type="CollisionShape2D" parent="Bones/Bone1" unique_id=1436357419]
+shape = SubResource("bone_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bones/Bone1" unique_id=1228407210]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("femur_tex")
+
+[node name="Bone2" type="Area2D" parent="Bones" unique_id=1967554555]
+position = Vector2(816, 324)
+script = ExtResource("bone_gd")
+
+[node name="Shape" type="CollisionShape2D" parent="Bones/Bone2" unique_id=850589636]
+shape = SubResource("bone_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bones/Bone2" unique_id=370867634]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("femur_tex")
+
+[node name="Bone3" type="Area2D" parent="Bones" unique_id=714444862]
+position = Vector2(1200, 444)
+script = ExtResource("bone_gd")
+
+[node name="Shape" type="CollisionShape2D" parent="Bones/Bone3" unique_id=1052425443]
+shape = SubResource("bone_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bones/Bone3" unique_id=1642132842]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("femur_tex")
+
+[node name="Bone4" type="Area2D" parent="Bones" unique_id=2055403382]
+position = Vector2(1584, 324)
+script = ExtResource("bone_gd")
+
+[node name="Shape" type="CollisionShape2D" parent="Bones/Bone4" unique_id=508122187]
+shape = SubResource("bone_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bones/Bone4" unique_id=509390378]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("femur_tex")
+
+[node name="Bone5" type="Area2D" parent="Bones" unique_id=1520975799]
+position = Vector2(1968, 204)
+script = ExtResource("bone_gd")
+
+[node name="Shape" type="CollisionShape2D" parent="Bones/Bone5" unique_id=201288914]
+shape = SubResource("bone_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bones/Bone5" unique_id=527796828]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("femur_tex")
+
+[node name="Bone6" type="Area2D" parent="Bones" unique_id=1177134661]
+position = Vector2(2352, 324)
+script = ExtResource("bone_gd")
+
+[node name="Shape" type="CollisionShape2D" parent="Bones/Bone6" unique_id=1467950937]
+shape = SubResource("bone_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bones/Bone6" unique_id=1243305628]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("femur_tex")
+
+[node name="Bone7" type="Area2D" parent="Bones" unique_id=727252862]
+position = Vector2(2784, 204)
+script = ExtResource("bone_gd")
+
+[node name="Shape" type="CollisionShape2D" parent="Bones/Bone7" unique_id=875750256]
+shape = SubResource("bone_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bones/Bone7" unique_id=40602995]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("femur_tex")
+
+[node name="Bone8" type="Area2D" parent="Bones" unique_id=741660115]
+position = Vector2(3168, 324)
+script = ExtResource("bone_gd")
+
+[node name="Shape" type="CollisionShape2D" parent="Bones/Bone8" unique_id=1055417979]
+shape = SubResource("bone_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bones/Bone8" unique_id=1332311722]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("femur_tex")
+
+[node name="Bone9" type="Area2D" parent="Bones" unique_id=1273924524]
+position = Vector2(3552, 444)
+script = ExtResource("bone_gd")
+
+[node name="Shape" type="CollisionShape2D" parent="Bones/Bone9" unique_id=1845236017]
+shape = SubResource("bone_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bones/Bone9" unique_id=141393107]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("femur_tex")
+
+[node name="Bone10" type="Area2D" parent="Bones" unique_id=1740026221]
+position = Vector2(3936, 324)
+script = ExtResource("bone_gd")
+
+[node name="Shape" type="CollisionShape2D" parent="Bones/Bone10" unique_id=819014725]
+shape = SubResource("bone_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bones/Bone10" unique_id=1431453563]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("femur_tex")
+
+[node name="Bone11" type="Area2D" parent="Bones" unique_id=1942190405]
+position = Vector2(4320, 444)
+script = ExtResource("bone_gd")
+
+[node name="Shape" type="CollisionShape2D" parent="Bones/Bone11" unique_id=1571511245]
+shape = SubResource("bone_shape")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bones/Bone11" unique_id=952475031]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("femur_tex")
+
+[node name="Enemies" type="Node2D" parent="." unique_id=86245841]
+
+[node name="Enemy0" parent="Enemies" unique_id=688632523 instance=ExtResource("enemy_scn")]
+position = Vector2(480, 444)
+
+[node name="Enemy1" parent="Enemies" unique_id=241065207 instance=ExtResource("enemy_scn")]
+position = Vector2(1200, 444)
+
+[node name="Enemy2" parent="Enemies" unique_id=9379898 instance=ExtResource("enemy_scn")]
+position = Vector2(1584, 324)
+
+[node name="Enemy3" parent="Enemies" unique_id=1479780681 instance=ExtResource("enemy_scn")]
+position = Vector2(2352, 324)
+
+[node name="Enemy4" parent="Enemies" unique_id=1485245066 instance=ExtResource("enemy_scn")]
+position = Vector2(2784, 204)
+
+[node name="Enemy5" parent="Enemies" unique_id=1784246860 instance=ExtResource("enemy_scn")]
+position = Vector2(3168, 324)
+
+[node name="Enemy6" parent="Enemies" unique_id=17444058 instance=ExtResource("enemy_scn")]
+position = Vector2(3936, 324)
+
+[node name="Enemy7" parent="Enemies" unique_id=1212805557 instance=ExtResource("enemy_scn")]
+position = Vector2(4320, 444)
+
+[node name="Goal" type="Area2D" parent="." unique_id=957422225]
+position = Vector2(4560, 420)
+script = ExtResource("goal_gd")
+
+[node name="Shape" type="CollisionShape2D" parent="Goal" unique_id=107456690]
+position = Vector2(72, 96)
+shape = SubResource("goal_shape")
+
+[node name="Pole" type="ColorRect" parent="Goal" unique_id=2110957984]
+offset_right = 5.0
+offset_bottom = 192.0
+color = Color(0.65, 0.65, 0.7, 1)
+
+[node name="Flag" type="ColorRect" parent="Goal" unique_id=1946676270]
+offset_left = 5.0
+offset_top = 4.0
+offset_right = 33.0
+offset_bottom = 22.0
+color = Color(0.2, 0.6, 1, 0.95)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2086157920]
+position = Vector2(200, 540)
+limit_left = 0
+limit_top = -300
+limit_right = 5000
+limit_bottom = 864
+
+[node name="Lulu" parent="." unique_id=847985676 instance=ExtResource("lulu_scn")]
+position = Vector2(80, 580)
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=810974248]
+stream = ExtResource("music_ogg")
+volume_db = -8.0
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=607453225]
+
+[node name="BG" type="ColorRect" parent="HUD" unique_id=324678805]
+offset_right = 1280.0
+offset_bottom = 60.0
+color = Color(0.08, 0.06, 0.04, 0.72)
+
+[node name="Stats" type="HBoxContainer" parent="HUD" unique_id=279380713]
+offset_left = 12.0
+offset_top = 8.0
+offset_right = 700.0
+offset_bottom = 50.0
+theme_override_constants/separation = 28
+
+[node name="BoneLabel" type="Label" parent="HUD/Stats" unique_id=2120487076]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "🦴 0"
+
+[node name="DistLabel" type="Label" parent="HUD/Stats" unique_id=1681975192]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "📍 0m"
+
+[node name="ScoreLabel" type="Label" parent="HUD/Stats" unique_id=1037028631]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "⭐ 0"
+
+[node name="LevelLabel" type="Label" parent="HUD/Stats" unique_id=710212658]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.8, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "🏙 CITY"
+
+[node name="MischiefBar" type="ProgressBar" parent="HUD" unique_id=1778778690]
+offset_left = 12.0
+offset_top = 52.0
+offset_right = 260.0
+offset_bottom = 68.0
+max_value = 10.0
+show_percentage = false
+
+[node name="MischiefBG" type="Label" parent="HUD" unique_id=811077997]
+offset_left = 12.0
+offset_top = 54.0
+offset_right = 110.0
+offset_bottom = 72.0
+theme_override_font_sizes/font_size = 13
+text = "🐾 LULU"
+
+[node name="FrenzyLabel" type="Label" parent="HUD" unique_id=1765698705]
+visible = false
+offset_left = 440.0
+offset_top = 12.0
+offset_right = 840.0
+offset_bottom = 48.0
+theme_override_colors/font_color = Color(1, 0.8, 0.1, 1)
+theme_override_font_sizes/font_size = 28
+text = "🐾 DOG FRENZY! 🐾"
+horizontal_alignment = 1

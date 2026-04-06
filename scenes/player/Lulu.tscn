@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://c17b6wt64nkwq"]
+
+[ext_resource type="Script" uid="uid://b2lbnrfow0r35" path="res://scenes/player/lulu.gd" id="1_ep6ma"]
+[ext_resource type="SpriteFrames" uid="uid://dgvxr1gd8bica" path="res://assets/spriteframes/lulu_frames.tres" id="2_sf"]
+[ext_resource type="AudioStream" uid="uid://co5q2gddomsej" path="res://assets/audio/jump.ogg" id="3_jump"]
+[ext_resource type="AudioStream" uid="uid://cjiihryi06x2h" path="res://assets/audio/hurt.ogg" id="4_hurt"]
+[ext_resource type="AudioStream" uid="uid://b6cyup8i8f36a" path="res://assets/audio/item.ogg" id="5_item"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lulu"]
+radius = 14.0
+height = 42.0
+
+[node name="Lulu" type="CharacterBody2D" unique_id=925257220]
+script = ExtResource("1_ep6ma")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1265697020]
+position = Vector2(0, -20)
+sprite_frames = ExtResource("2_sf")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=76534180]
+position = Vector2(0, -21)
+shape = SubResource("CapsuleShape2D_lulu")
+
+[node name="CoyoteTimer" type="Timer" parent="." unique_id=2097282580]
+wait_time = 0.15
+one_shot = true
+
+[node name="BarkCooldown" type="Timer" parent="." unique_id=1725489273]
+wait_time = 1.2
+one_shot = true
+
+[node name="PoopCooldown" type="Timer" parent="." unique_id=1593570714]
+wait_time = 8.0
+one_shot = true
+
+[node name="SndJump" type="AudioStreamPlayer2D" parent="." unique_id=2126794150]
+stream = ExtResource("3_jump")
+volume_db = -4.0
+
+[node name="SndHurt" type="AudioStreamPlayer2D" parent="." unique_id=431037463]
+stream = ExtResource("4_hurt")
+
+[node name="SndItem" type="AudioStreamPlayer2D" parent="." unique_id=306793856]
+stream = ExtResource("5_item")
+volume_db = -6.0

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ep60mxrcmxdu"
+path="res://.godot/imported/Splitting the Fields - Jon Björk.mp3-069bb77605c3e5ac6c30473cca229e23.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/Splitting the Fields - Jon Björk.mp3"
+dest_files=["res://.godot/imported/Splitting the Fields - Jon Björk.mp3-069bb77605c3e5ac6c30473cca229e23.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
